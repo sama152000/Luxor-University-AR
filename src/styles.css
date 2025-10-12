@@ -1,1 +1,120 @@
-/* You can add global styles to this file, and also import other style files */
+
+
+/* Bootstrap CSS */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+/* PrimeIcons CSS */
+@import 'primeicons/primeicons.css';
+
+/* Almarai Font */
+@font-face {
+  font-family: 'Almarai' !important;
+  src: url('assets/fonts/Almarai/Almarai-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Almarai';
+  src: url('assets/fonts/Almarai/Almarai-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Almarai';
+  src: url('assets/fonts/Almarai/Almarai-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Almarai';
+  src: url('assets/fonts/Almarai/Almarai-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+
+
+/* Global Color Variables for Faculty of Education - Luxor University */
+:root {
+  /* Main Colors from Logo */
+  --primary-color: #273075;
+  --dark-primary-color: #171c46;
+    --dark-primary-color-o: #171c46cc; /* with opacity */
+
+  --accent-color: #E49017; 
+    --dark-accent-color: #8a5710; 
+
+        /* Yellow */
+    --nano-color: #171c466b;      /* Light Blue */
+
+  
+  /* Background Colors */
+  --bg-light: #f8f9fa;
+  --bg-white: #ffffff;
+
+  /*default padding */
+  --section-padding: 2rem 3.5rem;
+}
+
+
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+}
+
+body {
+  font-family: 'IBM Plex Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-light);
+  line-height: 1.6;
+    color: var(--text-dark);
+
+
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--dark-primary-color);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+    font-family: 'IBM Plex Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+.section-title2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--dark-primary-color);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+    font-family: 'IBM Plex Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+.section-subtitle {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+    font-family: 'IBM Plex Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+.section-content {
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+    font-family: 'IBM Plex Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
