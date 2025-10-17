@@ -1,0 +1,86 @@
+<section class="contact-us-section">
+  <div class="pharaonic-background"></div>
+  <div class="contact-overlay"></div>
+  <div class="container-fluid px-4 px-lg-5">
+    <div class="section-header text-center mb-5" [class.visible]="isVisible">
+      <h2 class="section-title">اتصل بنا 
+        <i class="pi pi-envelope me-3"></i>
+      </h2>
+      <p class="section-subtitle mt-3">
+        تواصلوا مع جامعة الأقصر للاستفسارات والدعم
+      </p>
+      <div class="pharaonic-divider">
+        <div class="divider-line"></div>
+               <img src="/assets/icon.png" alt="زخرفة لوتس" class="lotus-ornament">
+
+        <div class="divider-line reverse"></div>
+      </div>
+    </div>
+
+    <div class="contact-content row g-4">
+      <div class="col-lg-6" [class.visible]="isVisible">
+        <div class="map-container">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3575.672693614052!2d32.63963531507992!3d25.687243983663964!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14491598710d3557%3A0x4063261a08d4d!2sLuxor%2C%20Egypt!5e0!3m2!1sar!2seg!4v1697041234567!5m2!1sar!2seg"
+            width="100%"
+            height="500"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+      <div class="col-lg-6" [class.visible]="isVisible" style="transition-delay: 0.2s;">
+        <div class="form-container">
+          <form (ngSubmit)="submitForm()" class="contact-form">
+            <div class="form-group">
+              <input
+                type="text"
+                [(ngModel)]="formData.name"
+                name="name"
+                placeholder="اسمك"
+                class="form-control"
+                required
+              >
+            </div>
+            <div class="form-group">
+              <input
+                type="email"
+                [(ngModel)]="formData.email"
+                name="email"
+                placeholder="بريدك الإلكتروني"
+                class="form-control"
+                required
+              >
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                [(ngModel)]="formData.subject"
+                name="subject"
+                placeholder="الموضوع"
+                class="form-control"
+                required
+              >
+            </div>
+            <div class="form-group">
+              <textarea
+                [(ngModel)]="formData.message"
+                name="message"
+                placeholder="رسالتك"
+                class="form-control"
+                rows="5"
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="btn-submit">
+              إرسال الرسالة
+              <i class="pi pi-arrow-left ms-2 col-lg-1"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

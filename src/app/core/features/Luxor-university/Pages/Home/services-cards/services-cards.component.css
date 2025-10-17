@@ -1,0 +1,149 @@
+.services-floating-section {
+  position: relative;
+  margin-top: -120px;
+  z-index: 10;
+  padding: 0 3.5rem;
+}
+
+.services-container {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out;
+}
+
+.services-container.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.service-card {
+  background: transparent; /* خلفية شفافة */
+  border-radius: 16px;
+  padding: 1.5rem 1rem; /* تقليل الـ padding لتقليل الارتفاع */
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px); /* تأثير زجاجي */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* حدود خفيفة */
+  min-height: 80px; /* ارتفاع أقل للكاردة */
+  display: flex;
+  flex-direction: row; /* الأيقونة والنص على نفس السطر */
+  align-items: center;
+  justify-content: center;
+  gap: 1rem; /* مسافة بين الأيقونة والنص */
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25); /* ظل أقوى عند الـ hover */
+  backdrop-filter: blur(12px); /* زيادة خفيفة في الـ blur */
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.card-icon {
+  width: 50px; /* تصغير حجم الأيقونة */
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-color, #003087) 0%, var(--dark-primary-color, #002060) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0; /* منع الأيقونة من التصغير */
+}
+
+.card-icon.accent {
+  background: linear-gradient(135deg, var(--accent-color, #f0a500) 0%, var(--dark-accent-color, #d48f00) 100%);
+}
+
+.card-icon i {
+  font-size: 1.8rem; /* تصغير حجم الأيقونة */
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* ظل للنص عشان الوضوح */
+}
+
+.service-card:hover .card-icon {
+  transform: scale(1.15);
+  box-shadow: 0 8px 20px rgba(39, 48, 117, 0.3);
+}
+
+.card-title {
+  font-size: 1.1rem; /* تصغير حجم النص */
+  font-weight: 700;
+  color: white;
+  margin: 0;
+  line-height: 1.4;
+  max-width: 150px; /* تحديد عرض النص لمنع التفاف طويل */
+  overflow: hidden;
+}
+
+.text-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 992px) {
+  .services-floating-section {
+    margin-top: -80px;
+    padding: 0 2rem;
+  }
+
+  .service-card {
+    padding: 1.2rem 0.8rem;
+    min-height: 70px; /* ارتفاع أقل */
+  }
+
+  .card-icon {
+    width: 45px;
+    height: 45px;
+  }
+
+  .card-icon i {
+    font-size: 1.6rem;
+  }
+
+  .card-title {
+    font-size: 1rem;
+    max-width: 120px;
+  }
+}
+
+@media (max-width: 768px) {
+  .services-floating-section {
+    margin-top: -60px;
+    padding: 0 1.5rem;
+  }
+
+  .service-card {
+    padding: 1rem 0.6rem;
+    min-height: 60px; /* ارتفاع أقل */
+  }
+
+  .card-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .card-icon i {
+    font-size: 1.4rem;
+  }
+
+  .card-title {
+    font-size: 0.9rem;
+    max-width: 100px;
+  }
+}

@@ -1,0 +1,338 @@
+.gallery-section {
+  padding: var(--section-padding);
+  background: transparent;
+  position: relative;
+  overflow: hidden;
+  gap: 0.5em;
+}
+
+.pharaonic-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://images.pexels.com/photos/17004825/pexels-photo-17004825.jpeg');
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+  animation: slowZoom 20s ease-in-out infinite alternate;
+}
+
+@keyframes slowZoom {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+.gallery-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(23, 28, 70, 0.726) 0%, rgba(39, 48, 117, 0.719) 100%);
+  z-index: 0;
+}
+
+.section-header {
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out;
+}
+
+.section-header.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-title {
+  display: inline-flex;
+  align-items: center;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: white;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.section-subtitle {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 600px;
+  margin: 0rem auto 0;
+  font-style: italic;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.pharaonic-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.divider-line.reverse {
+  background: linear-gradient(90deg, var(--accent-color, #f0a500), transparent);
+}
+
+
+.lotus-petal:nth-child(1) {
+  transform: rotate(0deg);
+}
+
+.lotus-petal:nth-child(2) {
+  transform: rotate(120deg);
+}
+
+.lotus-petal:nth-child(3) {
+  transform: rotate(240deg);
+}
+
+.globe-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 700px; /* Increased to accommodate larger wrapper */
+  padding: 1rem 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out 0.2s;
+}
+
+.globe-container.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.globe-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 900px; /* Increased from 700px */
+  height: 600px; /* Increased from 500px */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.globe {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  animation: rotateGlobe 40s linear infinite;
+}
+
+.globe.paused {
+  animation-play-state: paused;
+}
+
+@keyframes rotateGlobe {
+  from {
+    transform: rotateY(0deg) rotateX(10deg);
+  }
+  to {
+    transform: rotateY(360deg) rotateX(10deg);
+  }
+}
+
+.globe-item {
+  position: absolute;
+  width: 200px; /* Increased from 140px */
+  height: 200px; /* Increased from 140px */
+  left: 50%;
+  top: 50%;
+  margin-left: -100px; /* Adjusted for new size */
+  margin-top: -100px; /* Adjusted for new size */
+  transition: all 0.3s ease;
+}
+
+.item-content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 16px; /* Slightly larger border-radius */
+  overflow: hidden;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+  border: 3px solid rgba(228, 144, 23, 0.5);
+  transition: all 0.3s ease;
+}
+
+.globe-item:hover .item-content {
+  transform: scale(1.15); /* Slightly reduced scale for smoother effect */
+  box-shadow: 0 25px 70px rgba(228, 144, 23, 0.6);
+  border-color: var(--accent-color, #f0a500);
+  z-index: 100;
+}
+
+.globe-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.item-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(23, 28, 70, 0.95), rgba(39, 48, 117, 0.95));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem; /* Increased padding for larger images */
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.overlay-content {
+  text-align: center;
+  color: white;
+}
+
+.overlay-title {
+  font-size: 1.2rem; /* Increased from 1rem */
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: var(--accent-color, #f0a500);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.overlay-description {
+  font-size: 1rem; /* Increased from 0.85rem */
+  line-height: 1.5;
+  margin: 0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.globe-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px; /* Increased from 500px */
+  height: 600px; /* Increased from 500px */
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(228, 144, 23, 0.2), transparent 70%);
+  pointer-events: none;
+  animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+.btn-view-gallery {
+  display: inline-flex;
+  align-items: center;
+  background: linear-gradient(135deg, var(--accent-color, #f0a500), var(--dark-accent-color, #d48f00));
+  color: white;
+  padding: 1rem 3rem;
+  border: none;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(228, 144, 23, 0.4);
+  position: relative;
+  z-index: 2;
+}
+
+.btn-view-gallery:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(228, 144, 23, 0.6);
+}
+
+.text-center {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out 0.4s;
+}
+
+.text-center.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 991px) {
+  .globe-wrapper {
+    max-width: 700px; /* Adjusted for larger images */
+    height: 500px;
+  }
+
+  .globe-item {
+    width: 160px; /* Adjusted for responsiveness */
+    height: 160px;
+    margin-left: -80px;
+    margin-top: -80px;
+  }
+
+  .overlay-title {
+    font-size: 1rem;
+  }
+
+  .overlay-description {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .gallery-section {
+    padding: 4rem 1.5rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .globe-container {
+    min-height: 500px;
+  }
+
+  .globe-wrapper {
+    max-width: 500px;
+    height: 400px;
+  }
+
+  .globe-item {
+    width: 120px;
+    height: 120px;
+    margin-left: -60px;
+    margin-top: -60px;
+  }
+
+  .overlay-title {
+    font-size: 0.9rem;
+  }
+
+  .overlay-description {
+    font-size: 0.8rem;
+  }
+
+  .globe-glow {
+    width: 400px;
+    height: 400px;
+  }
+}

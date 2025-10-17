@@ -1,0 +1,79 @@
+<footer class="footer-section">
+  <div class="footer-content">
+    <div class="container-fluid">
+      <div class="row g-5">
+        <div class="col-lg-3 col-md-6">
+          <div class="footer-column">
+            <div class="footer-logo">
+              <img src="./assets/Logo.png" alt="جامعة الأقصر" class="logo-image">
+            </div>
+            <p class="footer-description">{{ universityInfo.description }}</p>
+            <p class="footer-slogan">{{ universityInfo.slogan }}</p>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="footer-column">
+            <h3 class="footer-title">روابط سريعة</h3>
+            <ul class="footer-links">
+              <li *ngFor="let link of quickLinks">
+                <a [href]="link.link">{{ link.label }}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="footer-column">
+            <h3 class="footer-title">روابط هامة</h3>
+            <ul class="footer-links">
+              <li *ngFor="let link of importantLinks">
+                <a [href]="link.link">{{ link.label }}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="footer-column">
+            <h3 class="footer-title">اتصل بنا</h3>
+            <div class="contact-info">
+              <div class="contact-item">
+                <i class="pi pi-map-marker"></i>
+                <span>{{ contactInfo.address }}</span>
+              </div>
+              <div class="contact-item">
+                <i class="pi pi-phone"></i>
+                <span>{{ contactInfo.phone }}</span>
+              </div>
+              <div class="contact-item">
+                <i class="pi pi-envelope"></i>
+                <span>{{ contactInfo.email }}</span>
+              </div>
+            </div>
+            <div class="social-links">
+              <a *ngFor="let social of socialLinks"
+                 [href]="social.link"
+                 [attr.aria-label]="social.label"
+                 class="social-icon">
+                <i class="pi {{ social.icon }}"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <p class="copyright-text">
+            © {{ currentYear }} جامعة الأقصر. جميع الحقوق محفوظة.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

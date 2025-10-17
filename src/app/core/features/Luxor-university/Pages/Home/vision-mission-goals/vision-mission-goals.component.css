@@ -1,0 +1,214 @@
+.vision-mission-section {
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+      padding: var(--section-padding);
+      height: 60vh;
+      align-items: center;
+      justify-content: center;
+        display: flex;
+          font-family: 'IBM Plex Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+
+
+}
+
+.pharaonic-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://images.pexels.com/photos/18991575/pexels-photo-18991575.jpeg');
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+  animation: slowZoom 20s ease-in-out infinite alternate; /* Match hero animation */
+}
+
+@keyframes slowZoom {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+.vision-mission-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(23, 28, 70, 0.5) 0%, rgba(39, 48, 117, 0.4) 100%);
+  z-index: 0;
+}
+
+.vision-mission-container {
+    padding: var(--section-padding);
+  position: relative;
+  z-index: 2;
+  max-width: 100%; /* Wider container for better content display */
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.1); /* Frosted glass effect */
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.vision-mission-container.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.vision-mission-container:hover {
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2); /* Subtle hover effect */
+}
+
+.tabs {
+  display: flex;
+  border-bottom: 3px solid var(--accent-color, #f0a500);
+}
+
+.tab {
+  flex: 1;
+  padding: 1.2rem;
+  text-align: center;
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  position: relative;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.tab:hover {
+  background: linear-gradient(135deg,  0%, rgba(255, 255, 255, 0.15) 100%);
+  color: var(--accent-color, #f0a500);
+}
+
+.tab.active {
+  background: linear-gradient(135deg, var(--accent-color, #f0a500) 0%, var(--dark-accent-color, #d48f00) 100%);
+  color: white;
+  clip-path: polygon(5% 0, 100% 5%, 95% 100%, 0 100%); /* Refined clip-path */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--accent-color, #f0a500);
+}
+
+.content {
+  padding: 2.5rem;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.content h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.description {
+  color: #f0f0f0;
+  line-height: 1.8;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.features-list {
+  list-style: none;
+}
+
+.features-list li {
+  color: #f0f0f0;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  padding-left: 2rem;
+  position: relative;
+  line-height: 1.6;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.features-list li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--accent-color, #f0a500);
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 992px) {
+  .vision-mission-section {
+    padding: 4rem 2rem;
+  }
+
+  .vision-mission-container {
+    max-width: 600px;
+  }
+
+  .tab {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .content {
+    padding: 2rem;
+  }
+
+  .content h2 {
+    font-size: 1.6rem;
+  }
+
+  .description, .features-list li {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .vision-mission-section {
+    padding: 3rem 1.5rem;
+  }
+
+  .vision-mission-container {
+    max-width: 100%;
+  }
+
+  .tab {
+    padding: 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  .content {
+    padding: 1.5rem;
+  }
+
+  .content h2 {
+    font-size: 1.4rem;
+  }
+
+  .description, .features-list li {
+    font-size: 0.9rem;
+  }
+}

@@ -1,0 +1,74 @@
+<div class="latest-news-wrapper">
+    <img src="assets/Frame.png" alt="Left Frame" class="left-frame">
+    <img src="assets/Frame.png" alt="Right Frame" class="right-frame">
+
+    <section class="latest-news-section">
+      <div class="container-fluid px-4 px-lg-5">
+        <div class="section-header mb-5">
+          <h2 class="section-title">
+اخر الاخبار           </h2>
+          <div class="pharaonic-divider">
+            <div class="divider-line"></div>
+        <img src="/assets/icon.png" alt="Icon" class="lotus-ornament">
+            <div class="divider-line"></div>
+          </div>
+        </div>
+
+        <div class="main-news-container mb-5" *ngIf="featuredNews">
+          <div class="row g-4 align-items-stretch">
+            <div class="col-lg-6">
+              <div class="main-news-image">
+                <img [src]="featuredNews.imageUrl" [alt]="featuredNews.title" class="img-fluid">
+                <div class="image-overlay"></div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="main-news-content">
+                <span class="featured-badge">
+                  <i class="pi pi-star-fill me-2"></i>اخر الاخبار
+                </span>
+                <h3 class="news-title">{{ featuredNews.title }}</h3>
+                <p class="news-description">{{ featuredNews.description }}</p>
+                <div class="news-meta">
+                  <i class="pi pi-calendar me-2"></i>
+                  <span>{{ featuredNews.date | date: 'MMMM dd, yyyy' }}</span>
+                </div>
+                <button class="btn-read-more">
+عرض الخبر بالكامل                  <i class="pi pi-arrow-left ms-2 me-2"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="news-cards-grid">
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-3" *ngFor="let newsItem of smallNews">
+              <div class="news-card" (click)="selectNews(newsItem)">
+                <div class="card-image-wrapper">
+                  <img [src]="newsItem.imageUrl" [alt]="newsItem.title" class="card-image">
+                  <div class="card-overlay"></div>
+                </div>
+                <div class="card-content">
+                  <h4 class="card-title">{{ newsItem.title }}</h4>
+                  <p class="card-description">{{ newsItem.description | slice:0:80 }}...</p>
+                  <div class="card-footer">
+                    <span class="card-date">
+                      <i class="pi pi-clock me-1"></i>
+                      {{ newsItem.date | date: 'MMM dd, yyyy' }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-5">
+          <button class="btn-view-all">
+عرض كل الأخبار            <i class="pi pi-external-link ms-2 me-2"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+</div>

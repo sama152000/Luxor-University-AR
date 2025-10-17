@@ -1,0 +1,16 @@
+<section class="services-floating-section">
+  <div class="container-fluid">
+    <div class="services-container" [class.visible]="isVisible">
+      <div class="row g-4">
+        <div class="col-lg-3 col-md-6" *ngFor="let card of cards; let i = index">
+          <div class="service-card" [style.animation-delay]="i * 0.1 + 's'">
+            <div class="card-icon" [class.accent]="card.color === 'accent'">
+              <i class="pi {{ card.icon }}"></i>
+            </div>
+            <h3 class="card-title text-ellipsis">{{ card.title }}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

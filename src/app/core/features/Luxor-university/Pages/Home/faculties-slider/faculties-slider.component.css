@@ -1,0 +1,292 @@
+.faculties-slider-section {
+  padding: var(--section-padding);
+  background: var(--primary-color, #003087);
+  position: relative;
+  overflow: hidden;
+}
+
+.section-header {
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out;
+}
+
+.section-header.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-title {
+  display: inline-flex;
+  align-items: center;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: white;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.section-subtitle {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 600px;
+  margin: 1rem auto 0;
+  font-style: italic;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.pharaonic-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.5rem;
+  gap: 1.5rem;
+}
+
+.divider-line {
+  height: 2px;
+  width: 120px;
+  background: linear-gradient(90deg, transparent, var(--accent-color, #f0a500));
+}
+
+.divider-line.reverse {
+  background: linear-gradient(90deg, var(--accent-color, #f0a500), transparent);
+}
+
+.lotus-ornament {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lotus-petal {
+  position: absolute;
+  width: 20px;
+  height: 30px;
+  background: var(--accent-color, #f0a500);
+  border-radius: 50% 50% 0 0;
+  transform-origin: bottom center;
+}
+
+.lotus-petal:nth-child(1) {
+  transform: rotate(0deg);
+}
+
+.lotus-petal:nth-child(2) {
+  transform: rotate(120deg);
+}
+
+.lotus-petal:nth-child(3) {
+  transform: rotate(240deg);
+}
+
+.slider-container {
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out 0.2s;
+}
+
+.slider-container.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.carousel {
+  position: relative;
+  width: 100% !important; /* ✅ تأكيد عرض كامل */
+}
+
+/* ✅ التحديث الرئيسي: عرض كامل 100% */
+.faculty-items {
+  display: flex !important;
+  justify-content: space-between !important; /* ✅ توزيع متساوي على العرض كامل */
+  align-items: center;
+  width: 100% !important; /* ✅ عرض كامل */
+  max-width: 100% !important;
+  padding: 0 20px !important; /* ✅ مساحة صغيرة من الجوانب */
+  box-sizing: border-box !important;
+  gap: 0 !important; /* ✅ إزالة الـgap للعرض الكامل */
+}
+
+/* ✅ أحجام اللوجوز - متساوية ومناسبة للعرض الكامل */
+.faculty-item {
+  flex: 1 !important; /* ✅ ياخد المساحة المتاحة متساوياً */
+  max-width: 200px !important; /* ✅ حد أقصى للحفاظ على الشكل */
+  height: 200px !important;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  margin: 0 8px !important; /* ✅ مساحة صغيرة بين اللوجوز */
+}
+
+/* ✅ الـPharaonic أكبر شوية لكن مش يخرب العرض */
+.faculty-item.pharaonic {
+  max-width: 300px !important;
+  height: 300px !important;
+  flex: 1.4 !important; /* ✅ أكبر شوية بس مش كتير */
+  margin: 0 12px !important;
+}
+
+.faculty-item:hover:not(.pharaonic) {
+  transform: scale(1.05) !important; /* ✅ تقليل الـscale علشان ميخرجش من العرض */
+  box-shadow: 0 15px 40px rgba(228, 144, 23, 0.6);
+}
+
+.faculty-image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain;
+}
+
+.item-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(23, 28, 70, 0.95), rgba(39, 48, 117, 0.95));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.faculty-item:hover .item-overlay {
+  opacity: 1;
+}
+
+.overlay-content {
+  text-align: center;
+  color: white;
+}
+
+.overlay-title {
+  font-size: 0.9rem !important; /* ✅ صغير شوية للعرض الجديد */
+  font-weight: 700;
+  color: var(--accent-color, #f0a500);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* ✅ تحسين الأسهم */
+.slick-arrow {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border-radius: 50%;
+  width: 45px !important;
+  height: 45px !important;
+  z-index: 3;
+  transition: all 0.3s ease;
+}
+
+.slick-arrow:hover {
+  background: var(--accent-color, #f0a500);
+}
+
+.slick-prev {
+  left: 10px !important; /* ✅ قريب من الحواف */
+}
+
+.slick-next {
+  right: 10px !important;
+}
+
+.slick-dots {
+  bottom: -45px !important;
+}
+
+.slick-dots li button:before {
+  font-size: 14px !important;
+  color: var(--accent-color, #f0a500);
+  opacity: 0.5;
+}
+
+.slick-dots li.slick-active button:before {
+  color: var(--accent-color, #f0a500);
+  opacity: 1;
+}
+
+/* ========================================
+RESPONSIVE - عرض كامل في كل الأحجام
+======================================== */
+@media (max-width: 991px) {
+  .faculty-items {
+    padding: 0 15px !important;
+  }
+  
+  .faculty-item {
+    max-width: 110px !important;
+    height: 110px !important;
+    margin: 0 6px !important;
+  }
+
+  .faculty-item.pharaonic {
+    max-width: 150px !important;
+    height: 150px !important;
+    margin: 0 8px !important;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .overlay-title {
+    font-size: 0.8rem !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .faculties-slider-section {
+    padding: 4rem 1rem !important;
+  }
+
+  .faculty-items {
+    padding: 0 10px !important;
+  }
+
+  .faculty-item {
+    max-width: 90px !important;
+    height: 90px !important;
+    margin: 0 4px !important;
+  }
+
+  .faculty-item.pharaonic {
+    max-width: 120px !important;
+    height: 120px !important;
+    margin: 0 6px !important;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  .overlay-title {
+    font-size: 0.75rem !important;
+  }
+
+  .slick-prev, .slick-next {
+    width: 40px !important;
+    height: 40px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .faculty-item {
+    max-width: 75px !important;
+    height: 75px !important;
+    margin: 0 3px !important;
+  }
+
+  .faculty-item.pharaonic {
+    max-width: 100px !important;
+    height: 100px !important;
+    margin: 0 5px !important;
+  }
+}

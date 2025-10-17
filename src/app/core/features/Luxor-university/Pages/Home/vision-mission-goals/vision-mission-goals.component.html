@@ -1,0 +1,22 @@
+<section class="vision-mission-section">
+  <div class="pharaonic-background"></div>
+  <div class="vision-mission-overlay"></div>
+
+  <div class="container-fluid">
+    <div class="vision-mission-container" [class.visible]="isVisible">
+      <div class="tabs">
+        <button *ngFor="let tab of tabs" class="tab" [class.active]="activeTab === tab.id" (click)="setActiveTab(tab.id)">
+          {{ tab.title }}
+        </button>
+      </div>
+
+      <div class="content">
+        <h2>{{ activeTabTitle }}</h2>
+        <p class="description" *ngIf="activeTab !== 'goals'">{{ activeTabContent }}</p>
+        <ul class="features-list" *ngIf="activeTab === 'goals'">
+          <li *ngFor="let goal of goals">{{ goal }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

@@ -67,10 +67,11 @@
   padding: 0;
   box-sizing: border-box;
 
+
 }
 
 body {
-  font-family: 'IBM Plex Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'IBM Plex Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
   background-color: var(--bg-light);
   line-height: 1.6;
     color: var(--text-dark);

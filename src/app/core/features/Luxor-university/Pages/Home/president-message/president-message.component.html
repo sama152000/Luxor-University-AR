@@ -1,0 +1,33 @@
+<section class="president-section">
+  <div class="pharaonic-background"></div>
+  <div class="president-overlay"></div>
+
+  <div class="container-fluid">
+    <div class="president-container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-4" [class.visible]="isVisible">
+          <div class="president-image-wrapper">
+            <div class="image-circle">
+              <img [src]="presidentData.image" [alt]="presidentData.name" class="president-image">
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-8" [class.visible]="isVisible">
+          <div class="president-content">
+            <div class="section-label">كلمة رئيس الجامعة</div>
+            <p class="president-message">{{ presidentData.message }}</p>
+            <div class="president-signature">
+              <div class="president-name">— {{ presidentData.name }}</div>
+              <div class="president-title">{{ presidentData.title }}</div>
+            </div>
+            <button class="read-more-btn">
+              <span>قراءة المزيد</span>
+              <i class="pi pi-arrow-left"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

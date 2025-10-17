@@ -1,0 +1,43 @@
+<section class="gallery-section">
+  <div class="pharaonic-background"></div>
+  <div class="gallery-overlay"></div>
+  <div class="container-fluid px-4 px-lg-5">
+    <div class="section-header text-center mb-5" [class.visible]="isVisible">
+      <h2 class="section-title">
+        <i class="pi pi-images me-3"></i>صور من جامعتنا
+      </h2>
+     
+        </div>
+        <div class="divider-line reverse"></div>
+      </div>
+
+    <div class="globe-container" [class.visible]="isVisible">
+      <div class="globe-wrapper">
+        <div class="globe" [class.paused]="isPaused">
+          <div
+            class="globe-item"
+            *ngFor="let item of galleryItems; let i = index"
+            [style.transform]="getItemTransform(i)"
+            (mouseenter)="pauseRotation(item)"
+            (mouseleave)="resumeRotation()">
+            <div class="item-content">
+              <img [src]="item.imageUrl" [alt]="item.title" class="globe-image">
+              <div class="item-overlay" *ngIf="hoveredItem?.id === item.id">
+                <div class="overlay-content">
+                  <h4 class="overlay-title">{{ item.title }}</h4>
+                  <p class="overlay-description" *ngIf="item.description">{{ item.description }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="globe-glow"></div>
+      </div>
+    </div>
+
+    <div class="text-center mt-5" [class.visible]="isVisible">
+      <button class="btn-view-gallery">
+عرض جميع الصور        
+      </button>
+    </div>
+</section>

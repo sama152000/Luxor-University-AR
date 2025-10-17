@@ -1,0 +1,30 @@
+<nav class="navbar-wrapper">
+  <div class="top-navbar">
+    <div class="container-fluid">
+      <div class="d-flex justify-content-end align-items-center h-100">
+        <a href="https://luxor-university-en.vercel.app/home" class="language-link">
+          <i class="pi pi-globe"></i>
+          <span>English</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-navbar" [class.scrolled]="isScrolled">
+    <div class="container-fluid">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="menu-container">
+          <ul class="nav-menu">
+            <li *ngFor="let item of menuItems; " class="nav-item">
+              <a [href]="item.link" class="nav-link">{{ item.label }}</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="logo-container">
+          <img src="./assets/Logo.png" alt="Luxor University Logo" class="university-logo">
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

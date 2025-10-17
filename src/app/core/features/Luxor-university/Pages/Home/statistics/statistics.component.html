@@ -1,0 +1,35 @@
+<section class="statistics-section">
+  <div class="pharaonic-background"></div>
+  <div class="statistics-overlay"></div>
+  <div class="container-fluid px-4 px-lg-5">
+    <div class="section-header text-center mb-5" [class.visible]="isVisible">
+      <h2 class="section-title">
+     انجازاتنا 
+      <i class="pi pi-chart-bar me-3"></i></h2>
+      <p class="section-subtitle mt-3">
+        تسليط الضوء على قوة وتنوع مجتمع جامعة الأقصر
+      </p>
+      <div class="pharaonic-divider">
+        <div class="divider-line"></div>
+        <div class="lotus-ornament">
+          <img src="/assets/icon.png" alt="زخرفة لوتس" class="lotus-ornament">
+        </div>
+        <div class="divider-line reverse"></div>
+      </div>
+    </div>
+
+    <div class="stats-container" [class.visible]="isVisible">
+      <div class="stats-grid">
+        <div class="stat-card" *ngFor="let stat of stats; let i = index" [class.visible]="isVisible" [style.transition-delay]="i * 0.1 + 's'">
+          <div class="icon-wrapper">
+            <i [class]="stat.icon"></i>
+          </div>
+          <div class="stat-content">
+            <h3 class="stat-number">{{ stat.number }}</h3>
+            <p class="stat-description">{{ stat.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

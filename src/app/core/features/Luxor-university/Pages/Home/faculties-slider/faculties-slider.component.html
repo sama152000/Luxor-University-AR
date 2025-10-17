@@ -1,0 +1,39 @@
+<section class="faculties-slider-section">
+  <div class="container-fluid px-4 px-lg-5">
+    <div class="section-header text-center mb-5" [class.visible]="isVisible">
+      <h2 class="section-title">
+       كلياتنا
+      </h2>
+      <p class="section-subtitle mt-3">
+        اكتشف البرامج الأكاديمية المتنوعة في جامعة الأقصر
+      </p>
+      <div class="pharaonic-divider">
+        <div class="divider-line"></div>
+        <img src="/assets/icon.png" alt="زخرفة لوتس" class="lotus-ornament">
+        <div class="divider-line reverse"></div>
+      </div>
+    </div>
+
+    <div class="slider-container" [class.visible]="isVisible">
+      <ngx-slick-carousel #slickModal class="carousel" [config]="slideConfig">
+        <div ngxSlickItem *ngFor="let slide of slides" class="slide">
+          <div class="faculty-items">
+            <div
+              class="faculty-item"
+              *ngFor="let item of slide.items"
+              [class.pharaonic]="item.type === 'pharaonic'"
+              (mouseenter)="item.type !== 'pharaonic' ? pauseSlider() : null"
+              (mouseleave)="resumeSlider()">
+              <img [src]="item.imageUrl" [alt]="item.title" class="faculty-image">
+              <div class="item-overlay" *ngIf="item.type !== 'pharaonic'">
+                <div class="overlay-content">
+                  <h4 class="overlay-title">{{ item.title }}</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ngx-slick-carousel>
+    </div>
+  </div>
+</section>
