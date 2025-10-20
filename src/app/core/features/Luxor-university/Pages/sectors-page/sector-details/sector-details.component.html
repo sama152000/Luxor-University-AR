@@ -1,0 +1,185 @@
+<section class="sector-details-section">
+  <div class="container-fluid">
+   
+
+    <div *ngIf="!isLoading && sector" class="sector-details-content">
+      <!-- <div class="page-breadcrumb">
+        <button class="breadcrumb-link" (click)="onBack()">
+          <i class="pi pi-home"></i>
+          الرئيسية
+        </button>
+        <i class="pi pi-angle-right"></i>
+        <button class="breadcrumb-link" (click)="onBack()">القطاعات</button>
+        <i class="pi pi-angle-right"></i>
+        <span class="breadcrumb-current">{{ sector.name }}</span>
+      </div> -->
+
+      <div class="page-header">
+        <button class="back-button" (click)="onBack()">
+          العودة إلى القطاعات
+          <i class="pi pi-arrow-left"></i>
+        </button>
+
+        
+      </div>
+
+      <div class="content-grid">
+        <article class="section-block overview-block">
+          <div class="block-header">
+            <i class="pi pi-info-circle"></i>
+            <h2>نظرة عامة على القطاع</h2>
+          </div>
+          <div class="block-content">
+            <p>{{ sector.overview }}</p>
+          </div>
+        </article>
+
+        <article class="section-block mission-block">
+          <div class="block-header">
+            <i class="pi pi-flag"></i>
+            <h2>الرسالة</h2>
+          </div>
+          <div class="block-content">
+            <p>{{ sector.mission }}</p>
+          </div>
+        </article>
+
+        <article class="section-block objectives-block">
+          <div class="block-header">
+            <i class="pi pi-check-circle"></i>
+            <h2>الأهداف</h2>
+          </div>
+          <div class="block-content">
+            <ul class="objectives-list">
+              <li *ngFor="let objective of sector.objectives">
+                <i class="pi pi-angle-double-right"></i>
+                <span>{{ objective }}</span>
+              </li>
+            </ul>
+          </div>
+        </article>
+      </div>
+
+      <div *ngIf="sector.departments && sector.departments.length > 0" class="departments-section">
+        <div class="section-header">
+          <i class="pi pi-sitemap"></i>
+          <h2 class="section-title2">الإدارات الفرعية</h2>
+        </div>
+
+        <div class="departments-grid">
+          <div *ngFor="let dept of sector.departments" class="department-card">
+            <div class="dept-header">
+              <div class="dept-icon">
+                <i class="pi pi-briefcase"></i>
+              </div>
+              <h3 class="dept-name">{{ dept.name }}</h3>
+            </div>
+
+            <div class="dept-contact">
+              <div class="contact-item">
+                <i class="pi pi-user"></i>
+                <span><strong>المسؤول:</strong> {{ dept.responsible_person }}</span>
+              </div>
+              <div class="contact-item">
+                <i class="pi pi-phone"></i>
+                <a [href]="'tel:' + dept.phone">{{ dept.phone }}</a>
+              </div>
+            </div>
+
+            <div class="dept-tasks">
+              <h4>المهام الرئيسية:</h4>
+              <ul>
+                <li *ngFor="let task of dept.tasks">
+                  <i class="pi pi-check"></i>
+                  <span>{{ task }}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="hasStatistics()" class="statistics-section">
+        <div class="section-header">
+          <i class="pi pi-chart-bar"></i>
+          <h2 class="section-title2">إحصائيات طلاب الدراسات العليا</h2>
+        </div>
+
+        <div class="statistics-table-wrapper">
+          <table class="statistics-table">
+            <thead>
+              <tr>
+                <th>الكلية</th>
+                <th>دبلوم</th>
+                <th>ماجستير</th>
+                <th>دكتوراه</th>
+                <th>الإجمالي</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let stat of getNonTotalStatistics()">
+                <td class="category-cell">{{ stat.category }}</td>
+                <td>{{ stat.diploma || '—' }}</td>
+                <td>{{ stat.masters || '—' }}</td>
+                <td>{{ stat.phd || '—' }}</td>
+                <td class="total-cell">{{ stat.total }}</td>
+              </tr>
+            </tbody>
+            <tfoot *ngIf="getTotalRow() as totalRow">
+              <tr class="total-row">
+                <td class="category-cell"><strong>الإجمالي</strong></td>
+                <td><strong>{{ totalRow.diploma }}</strong></td>
+                <td><strong>{{ totalRow.masters }}</strong></td>
+                <td><strong>{{ totalRow.phd }}</strong></td>
+                <td class="total-cell"><strong>{{ totalRow.total }}</strong></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+
+      <div class="download-section">
+        <button class="download-btn" (click)="downloadPDF()">
+          <i class="pi pi-download"></i>
+          تحميل دليل القطاع (PDF)
+        </button>
+      </div>
+
+      <nav class="sector-navigation">
+        <button
+          *ngIf="previousSector"
+          class="nav-btn prev-btn"
+          (click)="navigateToSector(previousSector.slug)"
+        >
+          <i class="pi pi-arrow-right"></i>
+          <div class="nav-text">
+            <span class="nav-label">القطاع السابق</span>
+            <span class="nav-title">{{ previousSector.name }}</span>
+          </div>
+        </button>
+
+        <button
+          *ngIf="nextSector"
+          class="nav-btn next-btn"
+          (click)="navigateToSector(nextSector.slug)"
+        >
+          <div class="nav-text">
+            <span class="nav-label">القطاع التالي</span>
+            <span class="nav-title">{{ nextSector.name }}</span>
+          </div>
+          <i class="pi pi-arrow-left"></i>
+        </button>
+      </nav>
+    </div>
+
+    <div *ngIf="!isLoading && !sector" class="error-state">
+      <i class="pi pi-exclamation-circle"></i>
+      <h2>القطاع غير موجود</h2>
+      <p>لم يتم العثور على القطاع المطلوب.</p>
+      <button class="back-button" (click)="onBack()">
+          <i class="pi pi-arrow-right"></i>
+
+      </button>
+    </div>
+  </div>
+</section>

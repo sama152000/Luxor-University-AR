@@ -1,0 +1,58 @@
+<app-page-header></app-page-header>
+
+<section class="faculties-section">
+  <div class="container-fluid">
+    <!-- 🔥 Pharaonic Header -->
+    <div class="page-header">
+      <div class="header-decoration">
+        <div class="pyramid-icon">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 10 L90 90 L10 90 Z" fill="currentColor"/>
+            <path d="M50 20 L80 80 L20 80 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+      </div>
+      <h1 class="section-title">كلياتنا</h1>
+      <p class="section-subtitle">اكتشف التميز الأكاديمي لجامعة الأقصر</p>
+      <div class="header-decoration right">
+        <div class="ankh-symbol">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="25" r="15" fill="none" stroke="currentColor" stroke-width="3"/>
+            <line x1="50" y1="40" x2="50" y2="90" stroke="currentColor" stroke-width="3"/>
+            <line x1="30" y1="55" x2="70" y2="55" stroke="currentColor" stroke-width="3"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Faculties Grid -->
+    <div class="faculties-grid">
+      <div class="faculty-card" *ngFor="let faculty of faculties; let i = index" 
+           [style.animation-delay]="'0.' + (i * 0.1) + 's'"
+           (click)="selectFaculty(faculty)">
+        <!-- <div class="card-icon-wrapper">
+          <i [class]="faculty.icon"></i>
+        </div> -->
+        <div class="card-overlay"></div>
+        <img [src]="faculty.imageUrl" [alt]="faculty.nameAr" class="faculty-image">
+        <div class="card-content">
+          <h3 class="faculty-name">{{ faculty.nameAr }}</h3>
+          <!-- <p class="faculty-ar-name">{{ faculty.nameAr }}</p> -->
+          <p class="faculty-description">{{ faculty.descriptionAr }}</p>
+          <div class="faculty-meta">
+            <span class="established">تأسست {{ faculty.established }}</span>
+            <span class="dean">العميد: {{ faculty.deanAr }}</span>
+          </div>
+        </div>
+        <!-- <div class="card-footer">
+          <a routerLink="/faculties/{{ faculty.id }}" class="explore-btn">
+            <span>Explore</span>
+            <i class="pi pi-arrow-right"></i>
+          </a>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-footer></app-footer>

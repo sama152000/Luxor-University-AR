@@ -1,0 +1,261 @@
+<app-page-header></app-page-header>
+<div class="all-news-container">
+  <!-- Breaking News Banner -->
+  
+   
+
+  
+  <!-- Trending Now Section -->
+  <div class="trending-section" *ngIf="trendingNews.length > 0">
+    <div class="container-fluid">
+      <div class="trending-header">
+        <h3 class="trending-title">
+          <i class="pi pi-fire"></i>
+          ما يتداول الآن
+        </h3>
+      </div>
+      <div class="trending-ticker">
+        <div class="trending-items">
+          <div class="trending-item" *ngFor="let news of trendingNews">
+            <a [routerLink]="['/news', news.id]" class="trending-link">
+              <span class="trending-category">{{ getNewsCategory(news) }}</span>
+              <span class="trending-title-text">{{ getNewsTitle(news) }}</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Page Header -->
+
+  <!-- Filter Section -->
+  <div class="filter-section">
+    <div class="container-fluid">
+      <div class="filter-card">
+        <div class="filter-header">
+          <h3 class="filter-title">
+            <i class="pi pi-filter"></i>
+            تصفية الأخبار
+          </h3>
+        </div>
+        <div class="filter-content">
+          <div class="row g-3">
+            <!-- Search Box -->
+            <div class="col-lg-3 col-md-6">
+              <div class="filter-group">
+                <label class="filter-label">
+                  <i class="pi pi-search"></i>
+                  بحث
+                </label>
+                <input type="text" 
+                       class="form-control filter-input" 
+                       [(ngModel)]="searchTerm"
+                       placeholder="ابحث في الأخبار..."
+                       (keyup.enter)="applyFilter()">
+              </div>
+            </div>
+
+            <!-- Category Dropdown -->
+            <div class="col-lg-3 col-md-6">
+              <div class="filter-group">
+                <label class="filter-label">
+                  <i class="pi pi-tags"></i>
+                  الفئة
+                </label>
+                <select class="form-select filter-input" [(ngModel)]="selectedCategory">
+                  <option value="">جميع الفئات</option>
+                  <option *ngFor="let category of categories" [value]="category">
+                    {{ category }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Date From -->
+            <div class="col-lg-2 col-md-6">
+              <div class="filter-group">
+                <label class="filter-label">
+                  <i class="pi pi-calendar"></i>
+                  من تاريخ
+                </label>
+                <input type="date" 
+                       class="form-control filter-input" 
+                       [(ngModel)]="dateFrom">
+              </div>
+            </div>
+
+            <!-- Date To -->
+            <div class="col-lg-2 col-md-6">
+              <div class="filter-group">
+                <label class="filter-label">
+                  <i class="pi pi-calendar"></i>
+                  إلى تاريخ
+                </label>
+                <input type="date" 
+                       class="form-control filter-input" 
+                       [(ngModel)]="dateTo">
+              </div>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="col-lg-2 col-md-12">
+              <div class="filter-actions">
+                <button class="btn btn-primary-custom filter-btn" 
+                        (click)="applyFilter()" 
+                        [disabled]="loading">
+                  <i class="pi pi-search"></i>
+                  تطبيق
+                </button>
+                <button class="btn btn-outline-secondary filter-btn" 
+                        (click)="clearFilter()" 
+                        [disabled]="loading">
+                  <i class="pi pi-times"></i>
+                  مسح
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <!-- News Grid Section -->
+  <div class="news-grid-section">
+    <div class="container-fluid">
+      <!-- Loading State -->
+      <div *ngIf="loading" class="loading-container">
+        <div class="loading-spinner">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">جاري التحميل...</span>
+          </div>
+          <p class="loading-text">جاري تحميل الأخبار...</p>
+        </div>
+      </div>
+
+      <!-- News Cards Grid -->
+      <div *ngIf="!loading" class="news-grid">
+        <div class="row g-4">
+          <div class="col-lg-4 col-md-6" *ngFor="let news of allNews">
+            <article class="news-card">
+              <div class="card-image-container">
+                <img [src]="news.imageUrl" 
+                     [alt]="getNewsTitle(news)" 
+                     class="card-image"
+                     loading="lazy">
+                <div class="card-overlay"></div>
+                <div class="card-badges">
+                  <span class="category-badge">{{ getNewsCategory(news) }}</span>
+                  <span *ngIf="news.isBreaking" class="breaking-badge">
+                    <i class="pi pi-bolt"></i>
+                    عاجل
+                  </span>
+                </div>
+              </div>
+              
+              <div class="card-content">
+                <div class="card-meta">
+                  <span class="news-date">
+                    <i class="pi pi-calendar"></i>
+                    {{ formatDate(news.date) }}
+                  </span>
+                  <span class="news-views">
+                    <i class="pi pi-eye"></i>
+                    {{ news.views }}
+                  </span>
+                </div>
+                
+                <h3 class="card-title">
+                  <a [routerLink]="['/news', news.id]">{{ getNewsTitle(news) }}</a>
+                </h3>
+                
+                <p class="card-description">
+                  {{ getNewsDescription(news) | slice:0:120 }}...
+                </p>
+                
+                <div class="card-footer">
+                  <div class="news-author">
+                    <i class="pi pi-user"></i>
+                    <span>{{ news.author }}</span>
+                  </div>
+                  <a [routerLink]="['/news', news.id]" class="read-more-btn">
+                    قراءة المزيد
+                    <i class="pi pi-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- No Results -->
+        <div *ngIf="allNews.length === 0" class="no-results">
+          <div class="no-results-content">
+            <i class="pi pi-info-circle no-results-icon"></i>
+            <h3 class="no-results-title">
+              لم يتم العثور على أخبار
+            </h3>
+            <p class="no-results-text">
+              حاول تعديل الفلاتر أو تحقق لاحقاً للمحتوى الجديد.
+            </p>
+            <button class="btn btn-primary-custom" (click)="clearFilter()">
+              مسح الفلاتر
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div *ngIf="!loading && totalPages > 1" class="pagination-section">
+        <nav aria-label="News pagination">
+          <ul class="pagination custom-pagination">
+            <!-- Previous Button -->
+            <li class="page-item" [class.disabled]="currentPage === 1">
+              <button class="page-link" 
+                      (click)="onPageChange(currentPage - 1)"
+                      [disabled]="currentPage === 1">
+                <i class="pi pi-chevron-left"></i>
+                السابق
+              </button>
+            </li>
+
+            <!-- Page Numbers -->
+            <li class="page-item" 
+                *ngFor="let page of getPaginationArray()"
+                [class.active]="page === currentPage">
+              <button class="page-link" (click)="onPageChange(page)">
+                {{ page }}
+              </button>
+            </li>
+
+            <!-- Next Button -->
+            <li class="page-item" [class.disabled]="currentPage === totalPages">
+              <button class="page-link" 
+                      (click)="onPageChange(currentPage + 1)"
+                      [disabled]="currentPage === totalPages">
+                التالي
+                <i class="pi pi-chevron-right"></i>
+              </button>
+            </li>
+          </ul>
+        </nav>
+        
+        <div class="pagination-info">
+          <span>
+            عرض
+            {{ (currentPage - 1) * pageSize + 1 }} -
+            {{ min(currentPage * pageSize, totalItems) }}
+            من
+            {{ totalItems }}
+            نتيجة
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

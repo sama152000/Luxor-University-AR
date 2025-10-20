@@ -12,13 +12,16 @@ export class NavbarComponent {
   isScrolled = false;
 
   menuItems = [
-    { label: 'اتصل بنا', link: '#contact' },
-    { label: 'الأخبار', link: '#news' },
-    { label: 'الكليات والبرامج', link: '#faculties' },
-    { label: 'حياة الطالب', link: '#student-life' },
-    { label: 'القطاعات', link: '#sectors' },
-    { label: 'الرعاية الصحية', link: '#healthcare' },
-    { label: 'عن الجامعة', link: '#about' },
+    
+    { label: 'تواصل معنا', link: 'contact-us' },
+    { label: 'الكليات والبرامج', link: './faculties' },
+    { label: 'حياة الطالب', link: './coming-soon' },
+    // { label: 'Healthcare', link: '#healthcare' },
+    {label :'الأدارات',link:'./departments'},
+    {label :'الهيكل التنظيمي',link:'./OrganizationalStructure'},
+    { label: 'القطاعات', link: 'sectors' },
+    { label: 'الأخبار', link: '/all-news' },
+    { label: 'عن الجامعة', link: './about' },
     { label: 'الرئيسية', link: '#home' },
   ];
 

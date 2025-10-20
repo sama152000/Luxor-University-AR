@@ -1,0 +1,96 @@
+<app-page-header></app-page-header>
+<section class="org-structure-section">
+  <div class="container-fluid">
+
+    
+
+    <!-- Main Layout -->
+    
+
+      <!-- 📊 Main Content -->
+      <main class="org-main">
+        <!-- Hierarchy Chart -->
+        <article class="chart-card">
+          <div class="card-header">
+            <div class="card-icon-wrapper">
+              <i class="pi pi-sitemap"></i>
+            </div>
+            <div class="card-badge">الهيكل التنظيمي</div>
+          </div>
+
+          <div class="card-body">
+            <h2 class="card-title">هيكل جامعة الأقصر التنظيمي</h2>
+            <p class="card-description">مخطط تنظيمي تفاعلي يوضح الهيكل الإداري</p>
+            
+            <div class="chart-container">
+              <!-- 🔥 CUSTOM GOLDEN TREE -->
+              <div class="custom-tree">
+                <ng-container *ngFor="let node of orgChart; let i = index">
+                  <div class="tree-node" [attr.data-level]="0">
+                    <div class="node-header" (click)="toggleNode(node, i)">
+                      <div class="node-toggle">
+                        <i *ngIf="node.children?.length" 
+                           class="pi" 
+                           [class.pi-chevron-down]="!node.expanded" 
+                           [class.pi-chevron-up]="node.expanded"></i>
+                      </div>
+                      <div class="node-icon"><i [class]="getNodeIcon(node)"></i></div>
+                      <span class="node-label">{{ node.label }}</span>
+                    </div>
+
+                    <ng-container *ngIf="node.children?.length">
+                      <div class="children-container" [class.expanded]="node.expanded">
+                        <div class="child-line"></div>
+                        <div class="children-wrapper">
+                          <ng-container *ngFor="let child of node.children; let j = index">
+                            <div class="tree-node" [attr.data-level]="1">
+                              <div class="node-header" (click)="toggleNode(child, j, true)">
+                                <div class="node-toggle child-toggle">
+                                  <i *ngIf="child.children?.length" 
+                                     class="pi" 
+                                     [class.pi-chevron-down]="!child.expanded" 
+                                     [class.pi-chevron-up]="child.expanded"></i>
+                                </div>
+                                <div class="node-icon"><i [class]="getNodeIcon(child)"></i></div>
+                                <span class="node-label">{{ child.label }}</span>
+                              </div>
+
+                              <ng-container *ngIf="child.children?.length">
+                                <div class="children-container" [class.expanded]="child.expanded">
+                                  <div class="child-line"></div>
+                                  <div class="children-wrapper">
+                                    <ng-container *ngFor="let leaf of child.children">
+                                      <div class="tree-node leaf-node">
+                                        <div class="node-header selected-able" (click)="onNodeSelect({node: leaf})">
+                                          <div class="node-toggle"></div>
+                                          <div class="node-icon"><i [class]="getNodeIcon(leaf)"></i></div>
+                                          <span class="node-label">{{ leaf.label }}</span>
+                                        </div>
+                                      </div>
+                                    </ng-container>
+                                  </div>
+                                </div>
+                              </ng-container>
+                            </div>
+                          </ng-container>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-decoration">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 100 L50 50 L100 100 Z" fill="currentColor" opacity="0.05"/>
+            </svg>
+          </div>
+        </article>
+
+    </main>
+</div>
+</section>
+
+<app-footer></app-footer>

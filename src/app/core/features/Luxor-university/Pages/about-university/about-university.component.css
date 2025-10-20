@@ -1,0 +1,266 @@
+.about-university-section {
+  position: relative;
+  min-height: 80vh;
+  padding: var(--section-padding);
+  background: #ffffff; /* 🔥 خلفية بيضاء */
+  overflow: hidden;
+}
+
+.about-university-container {
+  display: flex;
+  position: relative;
+  z-index: 2;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+  background: #ffffff; /* 🔥 بيضاء 100% */
+  border-radius: 25px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08); /* ظل خفيف */
+  border: 2px solid rgba(240, 165, 0, 0.2); /* إطار ذهبي خفيف */
+  opacity: 0;
+  transform: translateY(50px) scale(0.95);
+  transition: all 1s ease-out;
+}
+
+.about-university-container.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* 🔥 Vertical Tabs */
+.vertical-tabs {
+  display: flex;
+  flex-direction: column;
+  width: 280px;
+  background: #f8f9fa; /* رمادي فاتح */
+  border-radius: 20px 0 0 20px;
+  padding: 1.5rem 0;
+  box-shadow: 5px 0 20px rgba(0, 0, 0, 0.05);
+}
+
+.tab-item {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem 1.5rem;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  border-radius: 15px;
+  margin: 0.5rem 1rem;
+  color: #333; /* 🔥 نص غامق */
+  
+  &:hover {
+    background: #fff3cd; /* أصفر فاتح */
+    transform: translateX(10px);
+    box-shadow: 0 8px 25px rgba(240, 165, 0, 0.15);
+    color: #333;
+  }
+}
+
+.tab-item.active {
+  background: linear-gradient(135deg, #F0A500, #E48C17);
+  color: white !important; /* 🔥 أبيض في التاب النشط */
+  transform: scale(1.05);
+  box-shadow: 0 12px 35px rgba(240, 165, 0, 0.3);
+}
+
+.tab-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  transition: all 0.3s ease;
+  
+  i {
+    font-size: 1.5rem;
+    color: #F0A500;
+  }
+}
+
+.tab-item.active .tab-icon {
+  background: rgba(255, 255, 255, 0.9);
+  transform: rotate(360deg);
+  
+  i {
+    color: #F0A500 !important;
+  }
+}
+
+.tab-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-shadow: none; /* 🔥 بدون ظل */
+}
+
+.tab-indicator {
+  position: absolute;
+  right: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid #F0A500;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.tab-item.active .tab-indicator {
+  opacity: 1;
+}
+
+/* 🔥 Content Area */
+.content-area {
+  flex: 1;
+  padding: 3rem;
+  background: #ffffff; /* 🔥 بيضاء */
+  display: flex;
+  flex-direction: column;
+}
+
+.content-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.content-title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #1e3c72 !important; /* 🔥 أزرق غامق */
+  margin-bottom: 1.5rem;
+  letter-spacing: 2px;
+  text-shadow: none;
+}
+
+.pharaonic-divider {
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, #F0A500, transparent);
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+.pyramid-icon {
+  width: 30px;
+  height: 30px;
+  color: #F0A500;
+  margin: 1rem auto;
+  animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.content-body {
+  flex: 1;
+}
+
+.description {
+  font-size: 1.25rem;
+  line-height: 2;
+  color: #333 !important; /* 🔥 أسود غامق */
+  text-shadow: none;
+  text-align: justify;
+}
+
+/* 🔥 Goals Section */
+.goals-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.goal-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: #f8f9fa; /* رمادي فاتح */
+  border-radius: 15px;
+  border-right: 4px solid #F0A500;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateX(10px);
+    box-shadow: 0 10px 30px rgba(240, 165, 0, 0.15);
+  }
+}
+
+.goal-number {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #F0A500, #E48C17);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.goal-text {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #333 !important; /* 🔥 أسود غامق */
+  margin: 0;
+  text-shadow: none;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .about-university-container {
+    flex-direction: column;
+    padding: 1.5rem;
+  }
+  
+  .vertical-tabs {
+    width: 100%;
+    flex-direction: row;
+    overflow-x: auto;
+    border-radius: 15px 15px 0 0;
+    padding: 1rem;
+  }
+  
+  .tab-item {
+    flex: none;
+    white-space: nowrap;
+    margin: 0 0.5rem;
+  }
+  
+  .content-area {
+    padding: 2rem 1rem;
+  }
+  
+  .content-title {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-university-section {
+    padding: 2rem 0;
+  }
+  
+  .content-title {
+    font-size: 1.8rem;
+  }
+  
+  .description, .goal-text {
+    font-size: 1rem;
+  }
+  
+  .goal-item {
+    padding: 1rem;
+    flex-direction: column;
+    text-align: center;
+  }
+}

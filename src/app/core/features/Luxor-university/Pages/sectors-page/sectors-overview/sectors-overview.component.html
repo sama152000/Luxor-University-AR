@@ -1,0 +1,82 @@
+<section class="sectors-overview-section">
+  <div class="container-fluid">
+    <div class="page-header">
+      <div class="header-decoration">
+        <div class="pyramid-icon">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 10 L90 90 L10 90 Z" fill="currentColor"/>
+            <path d="M50 20 L80 80 L20 80 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+      </div>
+      <h1 class="section-title">قطاعات الجامعة</h1>
+      <p class="section-subtitle">اكتشف هيكلنا التنظيمي والتميز الإداري</p>
+      <div class="header-decoration right">
+        <div class="ankh-symbol">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="25" r="15" fill="none" stroke="currentColor" stroke-width="3"/>
+            <line x1="50" y1="40" x2="50" y2="90" stroke="currentColor" stroke-width="3"/>
+            <line x1="30" y1="55" x2="70" y2="55" stroke="currentColor" stroke-width="3"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+   
+    <div *ngIf="!isLoading" class="sectors-layout">
+      <aside class="sectors-sidebar">
+        <div class="sidebar-header">
+          <i class="pi pi-sitemap"></i>
+          <h3>التنقل السريع</h3>
+        </div>
+        <nav class="sidebar-nav">
+          <button
+            *ngFor="let sector of sectors"
+            class="sidebar-nav-item"
+            [class.active]="activeSectorId === sector.id"
+            (click)="scrollToSector(sector.id)"
+          >
+            <i [class]="sector.icon"></i>
+            <span>{{ sector.name }}</span>
+          </button>
+        </nav>
+      </aside>
+
+      <main class="sectors-main">
+        <div class="sectors-grid">
+          <article
+            *ngFor="let sector of sectors; let i = index"
+            [id]="'sector-' + sector.id"
+            class="sector-card"
+            [style.animation-delay]="i * 0.1 + 's'"
+          >
+            <div class="card-header">
+              <div class="card-icon-wrapper">
+                <i [class]="sector.icon"></i>
+              </div>
+              <div class="card-badge">القطاع {{ i + 1 }}</div>
+            </div>
+
+            <div class="card-body">
+              <h2 class="card-title">{{ sector.name }}</h2>
+              <p class="card-description">{{ sector.description }}</p>
+            </div>
+
+            <div class="card-footer">
+              <button class="view-details-btn" (click)="onViewDetails(sector.slug)">
+                <span>عرض التفاصيل</span>
+                <i class="pi pi-arrow-left"></i>
+              </button>
+            </div>
+
+            <div class="card-decoration">
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 100 L50 50 L100 100 Z" fill="currentColor" opacity="0.05"/>
+              </svg>
+            </div>
+          </article>
+        </div>
+      </main>
+    </div>
+  </div>
+</section>

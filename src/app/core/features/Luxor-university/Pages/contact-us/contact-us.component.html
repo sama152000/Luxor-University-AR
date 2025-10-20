@@ -1,0 +1,139 @@
+<app-page-header></app-page-header>
+
+<section class="contact-section">
+  <div class="container-fluid">
+    <!-- 🔥 Pharaonic Header -->
+    <div class="page-header">
+      <div class="header-decoration">
+        <div class="pyramid-icon">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 10 L90 90 L10 90 Z" fill="currentColor"/>
+            <path d="M50 20 L80 80 L20 80 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+      </div>
+      <div class="header-decoration right">
+        <div class="ankh-symbol">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="25" r="15" fill="none" stroke="currentColor" stroke-width="3"/>
+            <line x1="50" y1="40" x2="50" y2="90" stroke="currentColor" stroke-width="3"/>
+            <line x1="30" y1="55" x2="70" y2="55" stroke="currentColor" stroke-width="3"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-grid">
+      <!-- 🗺️ Map -->
+      <div class="map-container">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3575.672693614052!2d32.63963531507992!3d25.687243983663964!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14491598710d3557%3A0x4063261a08d4d!2sLuxor%2C%20Egypt!5e0!3m2!1sen!2sus!4v1697041234567!5m2!1sen!2sus"
+          width="100%"
+          height="100%"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+        <div class="map-overlay">
+          <i class="pi pi-map-marker"></i>
+          <p>العوامية، الأقصر، مصر</p>
+        </div>
+      </div>
+
+      <!-- 📝 Form -->
+      <div class="form-container">
+        <div class="form-card">
+          <h2 class="form-title">
+            <i class="pi pi-send"></i>
+            أرسل رسالتك
+          </h2>
+          <form (ngSubmit)="onSubmit()" #contactForm="ngForm">
+            <div class="form-group">
+              <label for="name">الاسم الكامل</label>
+              <input
+                type="text"
+                id="name"
+                [(ngModel)]="formData.name"
+                name="name"
+                required
+                placeholder="أدخل اسمك الكامل"
+                class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="email">البريد الإلكتروني</label>
+              <input
+                type="email"
+                id="email"
+                [(ngModel)]="formData.email"
+                name="email"
+                required
+                placeholder="your@email.com"
+                class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="subject">الموضوع</label>
+              <input
+                type="text"
+                id="subject"
+                [(ngModel)]="formData.subject"
+                name="subject"
+                required
+                placeholder="استفسار عن القبول..."
+                class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="message">الرسالة</label>
+              <textarea
+                id="message"
+                [(ngModel)]="formData.message"
+                name="message"
+                rows="5"
+                required
+                placeholder="أخبرنا المزيد عن استفسارك..."
+                class="form-control">
+              </textarea>
+            </div>
+
+            <button 
+              type="submit" 
+              class="submit-btn" 
+              [disabled]="isLoading || !formValid">
+              <i class="pi pi-send"></i>
+              <span *ngIf="!isLoading; else loadingText">إرسال الرسالة</span>
+              <ng-template #loadingText>جاري الإرسال... </ng-template>
+            </button>
+          </form>
+
+          <!-- Success Message -->
+          <p-message 
+            *ngIf="formSubmitted" 
+            severity="success" 
+            text="شكراً لك! تم إرسال رسالتك بنجاح. سنرد خلال 24 ساعة.">
+          </p-message>
+        </div>
+      </div>
+    </div>
+
+    <!-- 📞 Contact Card -->
+    <div class="contact-card-section">
+      <div class="contact-card">
+        <h2 class="card-title"></h2>
+        <div class="contact-grid">
+          <div class="contact-item" *ngFor="let info of contactInfo">
+            <i [class]="info.icon"></i>
+            <div>
+              <h4>{{ info.titleAr }}</h4>
+              <p>{{ info.valueAr }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-footer></app-footer>
