@@ -90,17 +90,26 @@
     }
 
     .hero-section {
-        padding-top: var(--navbar-total-height);
+        padding-top: 1rem;
+        justify-content: flex-start; /* Position hero content at the top */
+        padding-bottom: 2rem; /* Add some bottom padding to avoid overlap with services */
+        min-height: 120vh; /* Increase height for more space on mobile */
     }
 
     .hero-background {
         top: calc(-1 * var(--navbar-total-height)); /* تعديل للشاشات الصغيرة */
-        height: calc(100% + var(--navbar-total-height));
+        height: calc(120vh + var(--navbar-total-height)); /* Adjust height to match increased section height */
     }
 
     .hero-overlay {
         top: calc(-1 * var(--navbar-total-height)); /* تعديل للشاشات الصغيرة */
-        height: calc(100% + var(--navbar-total-height));
+        height: calc(120vh + var(--navbar-total-height)); /* Adjust height to match increased section height */
+    }
+
+    .hero-content {
+        padding: 1rem;
+        margin-bottom:11rem
+        /* Reduce padding for tighter content */
     }
 
     .hero-title {

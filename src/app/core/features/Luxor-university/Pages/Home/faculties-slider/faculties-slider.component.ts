@@ -13,15 +13,16 @@ export class FacultiesSliderComponent implements OnInit {
   @ViewChild('slickModal') slickModal!: SlickCarouselComponent;
 
   isVisible = false;
+  isMobile = false;
 
   slides = [
     {
       items: [
-        { type: 'logo', imageUrl: './assets/logo1.png', title: 'كلية الاثار' },
-        { type: 'logo', imageUrl: './assets/logo2.png', title: 'كلية الفنون الجميله' },
-        { type: 'pharaonic', imageUrl: './assets/middle.png', title: 'رمز فرعوني' },
-        { type: 'logo', imageUrl: './assets/logo3.png', title: 'كلية الطب' },
-        { type: 'logo', imageUrl: './assets/logo5.png', title: 'كلية الالسن' }
+        { type: 'logo', imageUrl: './assets/logo1.png', title: 'Faculty of Arts' },
+        { type: 'logo', imageUrl: './assets/logo2.png', title: 'Faculty of Engineering' },
+        { type: 'pharaonic', imageUrl: './assets/middle.png', title: 'Pharaonic Symbol' },
+        { type: 'logo', imageUrl: './assets/logo3.png', title: 'Faculty of Medicine' },
+        { type: 'logo', imageUrl: './assets/logo5.png', title: 'Faculty of Science' }
       ]
     },
    
@@ -57,6 +58,11 @@ export class FacultiesSliderComponent implements OnInit {
   };
 
   ngOnInit() {
+    this.checkMobile();
+
+    // Ensure jQuery and Slick are loaded before initializing
+    this.waitForLibraries();
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -71,17 +77,42 @@ export class FacultiesSliderComponent implements OnInit {
         observer.observe(element);
       }
     }, 100);
+
+    window.addEventListener('resize', () => {
+      this.checkMobile();
+    });
   }
 
-  pauseSlider() {
+  private waitForLibraries() {
+    // Wait for jQuery and Slick to be available
+    const checkLibraries = () => {
+      if (typeof (window as any).jQuery !== 'undefined' && typeof (window as any).jQuery.fn.slick !== 'undefined') {
+        // Libraries are loaded, component can proceed
+        console.log('jQuery and Slick loaded successfully');
+      } else {
+        // Retry after a short delay
+        setTimeout(checkLibraries, 100);
+      }
+    };
+    checkLibraries();
+  }
+
+  checkMobile() {
+    this.isMobile = window.innerWidth < 768;
+  }
+
+  public pauseSlider() {
     if (this.slickModal) {
       this.slickModal.unslick();
     }
   }
 
-  resumeSlider() {
+  public resumeSlider() {
     if (this.slickModal) {
-      this.slickModal.initSlick();
+      // Re-initialize slick after a delay to ensure DOM is ready
+      setTimeout(() => {
+        this.slickModal.initSlick();
+      }, 100);
     }
   }
 }

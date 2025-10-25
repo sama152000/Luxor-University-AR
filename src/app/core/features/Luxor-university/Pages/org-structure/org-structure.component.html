@@ -1,0 +1,138 @@
+<app-page-header></app-page-header>
+
+<div class="org-structure-container">
+  <!-- Header Section -->
+  <div class="org-header">
+    <div class="header-content">
+      <h1 class="section-title">الهيكل التنظيمي لجامعة الأقصر</h1>
+      <p class="section-subtitle">
+        يعرض هذا المخطط التسلسل الإداري الرسمي لجامعة الأقصر،
+        موضحًا هيكلية التقارير بين قيادة الجامعة، نواب الرئيس،
+        والإدارات التابعة لهم.
+      </p>
+    </div>
+  </div>
+
+  <!-- Controls Bar -->
+  <div class="controls-bar">
+    <div class="controls-left">
+      <button class="control-btn" (click)="expandAll()" title="توسيع الكل">
+        <i class="pi pi-plus-circle"></i>
+        <span>توسيع الكل</span>
+      </button>
+      <button class="control-btn" (click)="collapseAll()" title="طي الكل">
+        <i class="pi pi-minus-circle"></i>
+        <span>طي الكل</span>
+      </button>
+    </div>
+
+    <div class="controls-center">
+      <button class="control-btn zoom-btn" (click)="zoomOut()" title="تصغير">
+        <i class="pi pi-search-minus"></i>
+      </button>
+      <button class="control-btn zoom-btn" (click)="resetZoom()" title="إعادة تعيين التكبير">
+        <span>{{ (zoomLevel * 100).toFixed(0) }}%</span>
+      </button>
+      <button class="control-btn zoom-btn" (click)="zoomIn()" title="تكبير">
+        <i class="pi pi-search-plus"></i>
+      </button>
+    </div>
+
+    <div class="controls-right">
+      <button class="control-btn download-btn" (click)="downloadPDF()" title="تحميل PDF">
+        <i class="pi pi-download"></i>
+        <span>تحميل PDF</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Organizational Chart -->
+  <div class="org-chart-wrapper">
+    <div class="org-chart-scroll">
+      <div class="org-chart" [style.transform]="'scale(' + zoomLevel + ')'">
+        <ng-container *ngIf="orgRoot">
+          <div class="org-tree">
+            <ng-container *ngTemplateOutlet="nodeTemplate; context: { $implicit: orgRoot, level: 0 }"></ng-container>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sidebar for Node Details -->
+  <div class="sidebar" [class.show]="showSidebar">
+    <div class="sidebar-header">
+      <h3>{{ selectedNode?.title }}</h3>
+      <button class="close-btn" (click)="closeSidebar()">
+        <i class="pi pi-times"></i>
+      </button>
+    </div>
+    <div class="sidebar-content" *ngIf="selectedNode">
+      <div class="detail-item" *ngIf="selectedNode.name">
+        <i class="pi pi-user"></i>
+        <div>
+          <label>القيادة</label>
+          <p>{{ selectedNode.name }}</p>
+        </div>
+      </div>
+      <div class="detail-item">
+        <i class="pi pi-tag"></i>
+        <div>
+          <label>النوع</label>
+          <p>{{ selectedNode.type }}</p>
+        </div>
+      </div>
+      <div class="detail-item" *ngIf="selectedNode.description">
+        <i class="pi pi-info-circle"></i>
+        <div>
+          <label>الوصف</label>
+          <p>{{ selectedNode.description }}</p>
+        </div>
+      </div>
+      <div class="detail-item" *ngIf="hasChildren(selectedNode)">
+        <i class="pi pi-sitemap"></i>
+        <div>
+          <label>الإدارات الفرعية</label>
+          <p>{{ selectedNode.children?.length }} إدارات/وحدات</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Recursive Node Template -->
+<ng-template #nodeTemplate let-node let-level="level">
+  <div class="node-container" [class.expanded]="node.expanded">
+    <div class="node-wrapper">
+      <div
+        class="org-node {{ getNodeClass(node.type) }}"
+        (click)="selectNode(node)">
+        <div class="node-icon" *ngIf="node.icon">
+          <i [class]="node.icon"></i>
+        </div>
+        <div class="node-content">
+          <h4 class="node-title">{{ node.label }}</h4>
+          <p class="node-name" *ngIf="node.name">{{ node.name }}</p>
+        </div>
+        <button
+          *ngIf="hasChildren(node)"
+          class="expand-btn"
+          (click)="toggleNode(node); $event.stopPropagation()">
+          <i [class]="node.expanded ? 'pi pi-chevron-up' : 'pi pi-chevron-down'"></i>
+        </button>
+      </div>
+
+      <div class="connector" *ngIf="hasChildren(node) && node.expanded"></div>
+    </div>
+
+    <div class="children-container" *ngIf="node.expanded && hasChildren(node)">
+      <div class="children-wrapper">
+        <div *ngFor="let child of node.children" class="child-branch">
+          <div class="branch-line"></div>
+          <ng-container *ngTemplateOutlet="nodeTemplate; context: { $implicit: child, level: level + 1 }"></ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<app-footer></app-footer>

@@ -290,3 +290,35 @@ RESPONSIVE - عرض كامل في كل الأحجام
     margin: 0 5px !important;
   }
 }
+
+/* Mobile Stacked Layout */
+.mobile-faculty-items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.mobile-faculty-items .faculty-item {
+  flex: none !important;
+  max-width: 250px !important;
+  height:200px !important;
+  margin: 0 !important;
+  width: 100%;
+  max-width: 300px;
+}
+
+.mobile-faculty-items .faculty-item.pharaonic {
+  max-width: 350px !important;
+  height: 350px !important;
+}
+
+.mobile-faculty-items .faculty-item:hover:not(.pharaonic) {
+  transform: scale(1.05);
+  box-shadow: 0 15px 40px rgba(228, 144, 23, 0.6);
+}
+
+.mobile-faculty-items .overlay-title {
+  font-size: 1rem !important;
+}

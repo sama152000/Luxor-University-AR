@@ -2,20 +2,3 @@
   position: relative;
   min-height: 100vh;
 }
-
-.left-frame,
-.right-frame {
-  position: absolute;
-  top: 0;
-  height: 100%;
-  width: auto;
-  z-index: -1;
-}
-
-.left-frame {
-  left: 0;
-}
-
-.right-frame {
-  right: 0;
-}

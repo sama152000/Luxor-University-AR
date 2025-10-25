@@ -1,0 +1,54 @@
+<app-page-header></app-page-header>
+
+<section class="centers-section">
+  <div class="container-fluid py-5">
+    <div class="row">
+      <!-- 🔥 Sidebar -->
+      <div class="col-lg-3 col-md-4 mb-4">
+        <div class="sidebar">
+          <h2 class="section-title2 mb-4">مراكز الجامعة</h2>
+          <div class="sidebar-item" 
+               *ngFor="let center of centers"
+               [class.active]="selectedCenterId === center.id"
+               (click)="selectCenter(center.id)">
+            <i class="pi pi-building me-2"></i>
+            {{ center.name }}
+          </div>
+        </div>
+      </div>
+
+      <!-- 🔥 Main Content -->
+      <div class="col-lg-9 col-md-8">
+        <!-- Search Bar -->
+        <div class="search-bar mb-5">
+          <span class="p-input-icon-left w-100">
+            <i class="pi pi-search"></i>
+            <input pInputText 
+                   type="text" 
+                   class="form-control" 
+                   placeholder="ابحث عن مركز..." 
+                   [(ngModel)]="searchQuery" 
+                   (input)="onSearch()">
+          </span>
+        </div>
+
+        <!-- Centers Grid -->
+        <div class="row">
+          <div class="col-lg-4 col-md-6 mb-4" *ngFor="let center of filteredCenters">
+            <p-card class="center-card" [attr.id]="center.id">
+              <div class="card-body">
+                <h3 class="card-title">{{ center.name }}</h3>
+                <p class="card-text">{{ center.description }}</p>
+                <a routerLink="/centers/{{center.id}}" class="btn btn-primary-custom">
+                  <i class="pi pi-arrow-left me-2"></i>عرض التفاصيل
+                </a>
+              </div>
+            </p-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-footer></app-footer>

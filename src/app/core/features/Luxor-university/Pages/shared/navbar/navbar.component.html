@@ -1,12 +1,16 @@
 <nav class="navbar-wrapper">
   <div class="top-navbar">
     <div class="container-fluid">
-      <div class="d-flex justify-content-end align-items-center h-100">
-        <a href="
-        https://luxor-university-en-oubw.vercel.app/all-news
-        " class="language-link">
+      <div class="d-flex justify-content-between align-items-center h-100">
+        <button class="hamburger-btn" (click)="toggleMenu()" [attr.aria-expanded]="isMenuOpen" aria-label="Toggle navigation menu">
+        </button>
+        <div class="logo-container mobile-logo">
+          <img src="./assets/Logo.png" alt="Luxor University Logo" class="university-logo">
+        </div>
+        <a href="        https://luxor-university-en-oubw.vercel.app
+" class="language-link">
           <i class="pi pi-globe"></i>
-          <span>English</span>
+          <span>العربية</span>
         </a>
       </div>
     </div>
@@ -14,19 +18,39 @@
 
   <div class="main-navbar" [class.scrolled]="isScrolled">
     <div class="container-fluid">
-      <div class="d-flex justify-content-between align-items-center">
+      <div class="d-flex justify-content-end align-items-center">
+        <div class="logo-container desktop-logo">
+          <img src="./assets/Logo.png" alt="Luxor University Logo" class="university-logo">
+        </div>
+        <div class="mobile-header">
+          
+          <button class="hamburger-btn" (click)="toggleMenu()" [attr.aria-expanded]="isMenuOpen" aria-label="Toggle navigation menu">
+            <i class="pi" [ngClass]="isMenuOpen ? 'pi-times' : 'pi-bars'"></i>
+          </button>
+        </div>
+
+
         <div class="menu-container">
           <ul class="nav-menu">
             <li *ngFor="let item of menuItems; " class="nav-item">
-              <a [href]="item.link" class="nav-link">{{ item.label }}</a>
+              <a [routerLink]="item.link" class="nav-link" (click)="closeMenu()">{{ item.label }}</a>
             </li>
           </ul>
         </div>
 
-        <div class="logo-container">
-          <img src="./assets/Logo.png" alt="Luxor University Logo" class="university-logo">
-        </div>
+        <!-- Mobile Menu -->
+        <ul class="mobile-nav-menu" [class.open]="isMenuOpen">
+          <li *ngFor="let item of menuItems; " class="nav-item">
+            <a [routerLink]="item.link" class="nav-link" (click)="closeMenu()">{{ item.label }}</a>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
+
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay"
+       [class.active]="isMenuOpen"
+       (click)="toggleMenu()"
+       aria-hidden="true"></div>
 </nav>

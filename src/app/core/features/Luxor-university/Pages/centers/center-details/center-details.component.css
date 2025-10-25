@@ -1,0 +1,336 @@
+/* Center Details Section */
+.center-details-section {
+  background: var(--bg-light);
+  padding: var(--section-padding);
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Subtle background pattern */
+.center-details-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(circle at 15% 85%, rgba(228, 144, 23, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at 85% 15%, rgba(39, 48, 117, 0.02) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.center-details-section > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Breadcrumb Styling */
+.breadcrumb-nav {
+  margin-bottom: 2rem;
+  padding: 0;
+}
+
+.breadcrumb-nav a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.breadcrumb-nav a:hover {
+  color: var(--accent-color);
+}
+
+.breadcrumb-nav span {
+  color: var(--nano-color);
+  margin: 0 0.5rem;
+}
+
+/* Main Details Container */
+.center-details {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.center-details.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Card Styling */
+.card {
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(39, 48, 117, 0.08);
+  background: var(--bg-white);
+  border: 1px solid rgba(39, 48, 117, 0.08);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Golden accent at top of cards */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-color), var(--dark-accent-color));
+}
+
+.card:hover {
+  box-shadow: 0 8px 30px rgba(39, 48, 117, 0.12);
+  transform: translateY(-2px);
+}
+
+.card-body {
+  padding: 2.5rem;
+}
+
+/* Title Styling */
+.section-title2 {
+  color: var(--dark-primary-color);
+  margin-bottom: 1.5rem;
+  font-size: 1.75rem;
+  font-weight: 700;
+  position: relative;
+  padding-bottom: 0.75rem;
+}
+
+.section-title2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-color), var(--dark-accent-color));
+  border-radius: 2px;
+}
+
+/* Content Text */
+.section-content {
+  font-size: 1.1rem;
+  color: var(--primary-color);
+  line-height: 1.8;
+  margin: 0;
+}
+
+/* Services List */
+.services-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.services-list li {
+  font-size: 1.05rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  position: relative;
+  padding: 0.75rem 1rem 0.75rem 3rem;
+  background: rgba(228, 144, 23, 0.04);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  border-left: 3px solid transparent;
+}
+
+.services-list li::before {
+  content: '◆';
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--accent-color);
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.services-list li:hover {
+  background: rgba(228, 144, 23, 0.08);
+  border-left-color: var(--accent-color);
+  transform: translateX(4px);
+}
+
+/* Navigation Bar */
+.navigation-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding: 2rem 0;
+}
+
+/* PrimeNG Button Overrides */
+.navigation-bar ::ng-deep .p-button {
+  border-radius: 10px;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Primary Button (Back to All Centers) */
+.navigation-bar ::ng-deep .p-button-primary {
+  background: linear-gradient(135deg, var(--accent-color), var(--dark-accent-color));
+  border: none;
+  color: white;
+  box-shadow: 0 4px 12px rgba(228, 144, 23, 0.2);
+}
+
+.navigation-bar ::ng-deep .p-button-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(228, 144, 23, 0.3);
+  background: linear-gradient(135deg, var(--dark-accent-color), var(--accent-color));
+}
+
+/* Outlined Secondary Buttons (Previous/Next) */
+.navigation-bar ::ng-deep .p-button-outlined {
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color);
+  background: transparent;
+}
+
+.navigation-bar ::ng-deep .p-button-outlined:hover {
+  background: rgba(228, 144, 23, 0.08);
+  border-color: var(--dark-accent-color);
+  color: var(--dark-accent-color);
+  transform: translateY(-2px);
+}
+
+.navigation-bar ::ng-deep .p-button .p-button-icon {
+  font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .center-details-section {
+    padding: 2rem 2rem;
+  }
+
+  .card-body {
+    padding: 2rem;
+  }
+
+  .section-title2 {
+    font-size: 1.5rem;
+  }
+
+  .section-content {
+    font-size: 1.05rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .center-details-section {
+    padding: 2rem 1rem;
+  }
+
+  .card-body {
+    padding: 1.75rem;
+  }
+
+  .section-title2 {
+    font-size: 1.35rem;
+  }
+
+  .section-content {
+    font-size: 1rem;
+  }
+
+  .services-list li {
+    font-size: 1rem;
+    padding: 0.7rem 1rem 0.7rem 2.75rem;
+  }
+
+  .services-list li::before {
+    left: 0.85rem;
+    font-size: 1.1rem;
+  }
+
+  .navigation-bar {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .navigation-bar ::ng-deep .p-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 576px) {
+  .card-body {
+    padding: 1.5rem;
+  }
+
+  .section-title2 {
+    font-size: 1.25rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .section-title2::after {
+    width: 50px;
+    height: 2px;
+  }
+
+  .section-content {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .services-list li {
+    font-size: 0.95rem;
+    padding: 0.65rem 0.85rem 0.65rem 2.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .services-list li::before {
+    left: 0.75rem;
+    font-size: 1rem;
+  }
+
+  .navigation-bar {
+    padding: 1.5rem 0;
+  }
+
+  .navigation-bar ::ng-deep .p-button {
+    padding: 0.7rem 1.25rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Animation Enhancement */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.center-details.visible .card:nth-child(1) {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.center-details.visible .card:nth-child(2) {
+  animation: fadeInUp 0.6s ease 0.1s forwards;
+}
+
+.center-details.visible .navigation-bar {
+  animation: fadeInUp 0.6s ease 0.2s forwards;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}

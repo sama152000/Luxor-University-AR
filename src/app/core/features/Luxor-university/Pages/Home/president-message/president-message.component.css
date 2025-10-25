@@ -3,8 +3,6 @@
   padding: var(--section-padding);
   overflow: hidden;
   background: transparent;
-    font-family: 'IBM Plex Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-
 }
 
 .pharaonic-background {
@@ -222,7 +220,7 @@
 
 @media (max-width: 768px) {
   .president-section {
-    padding: 3rem 1.5rem;
+    padding: 1rem 0rem;
   }
 
   .image-circle {

@@ -208,6 +208,11 @@ padding: var(--section-padding);
     }
 
     @media (max-width: 767px) {
+ .events-conferences-section {
+padding: 0rem;
+  
+    }
+
       .card-layout {
         flex-direction: column;
         min-height: auto;
@@ -215,6 +220,11 @@ padding: var(--section-padding);
 
       .card-image-section {
         flex: 0 0 200px;
+
+      }
+
+      .card-text-section {
+        padding: 1.75rem 1rem;
       }
 
       .date-badge {

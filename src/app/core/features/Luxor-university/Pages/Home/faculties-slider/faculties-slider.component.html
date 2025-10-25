@@ -2,20 +2,19 @@
   <div class="container-fluid px-4 px-lg-5">
     <div class="section-header text-center mb-5" [class.visible]="isVisible">
       <h2 class="section-title">
-       كلياتنا
+        <i class="pi pi-book me-3"></i>كلياتنا
       </h2>
-      <p class="section-subtitle mt-3">
-        اكتشف البرامج الأكاديمية المتنوعة في جامعة الأقصر
-      </p>
+    
       <div class="pharaonic-divider">
         <div class="divider-line"></div>
-        <img src="/assets/icon.png" alt="زخرفة لوتس" class="lotus-ornament">
+        <img src="/assets/icon.png" alt="أيقونة" class="lotus-ornament">
         <div class="divider-line reverse"></div>
       </div>
     </div>
 
     <div class="slider-container" [class.visible]="isVisible">
-      <ngx-slick-carousel #slickModal class="carousel" [config]="slideConfig">
+      <!-- Desktop/Tablet Carousel -->
+      <ngx-slick-carousel #slickModal class="carousel" [config]="slideConfig" *ngIf="!isMobile">
         <div ngxSlickItem *ngFor="let slide of slides" class="slide">
           <div class="faculty-items">
             <div
@@ -34,6 +33,21 @@
           </div>
         </div>
       </ngx-slick-carousel>
+
+      <!-- Mobile Stacked Layout -->
+      <div class="mobile-faculty-items" *ngIf="isMobile">
+        <div
+          class="faculty-item"
+          *ngFor="let item of slides[0].items"
+          [class.pharaonic]="item.type === 'pharaonic'">
+          <img [src]="item.imageUrl" [alt]="item.title" class="faculty-image">
+          <div class="item-overlay" *ngIf="item.type !== 'pharaonic'">
+            <div class="overlay-content">
+              <h4 class="overlay-title">{{ item.title }}</h4>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
