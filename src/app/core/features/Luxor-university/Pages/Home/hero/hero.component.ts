@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HeroService } from '../../../Services/hero.service';
+import { Hero } from '../../../model/hero.model';
 
 @Component({
   selector: 'app-hero',
@@ -10,10 +12,17 @@ import { CommonModule } from '@angular/common';
 })
 export class HeroComponent implements OnInit {
   isVisible = false;
+  heroData: Hero | null = null;
+
+  constructor(private heroService: HeroService) {}
 
   ngOnInit() {
     setTimeout(() => {
       this.isVisible = true;
     }, 100);
+
+    this.heroService.getHeroData().subscribe((data: Hero) => {
+      this.heroData = data;
+    });
   }
 }

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
-import { MessageModule } from 'primeng/message';
 import { PageHeaderComponent } from '../shared/page-header/page-header.component';
 import { FooterComponent } from '../shared/footer/footer.component';
 
@@ -20,7 +19,6 @@ interface ContactInfo {
   standalone: true,
   imports: [
     CommonModule, FormsModule, RouterModule, ButtonModule,
-    MessageModule,
     PageHeaderComponent,FooterComponent
   ],
   templateUrl: './contact-us.component.html',

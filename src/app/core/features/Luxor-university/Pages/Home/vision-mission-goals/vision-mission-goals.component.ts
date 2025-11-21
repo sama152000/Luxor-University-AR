@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AboutUniversityService } from '../../../Services/about-university.service';
 
 interface Tab {
   id: string;
@@ -18,27 +19,9 @@ export class VisionMissionGoalsComponent implements OnInit {
   isVisible = false;
   activeTab = 'vision';
 
-  tabs: Tab[] = [
-    { 
-      id: 'vision', 
-      title: 'رؤيتنا', 
-      content: `تطمح جامعة الأقصر لتكون جامعة إقليمية رائدة، معترف بها عالمياً في التعليم العالي والبحث العلمي، تساهم في بناء مجتمع المعرفة وتطوير الموارد البشرية المؤهلة القادرة على المنافسة محلياً وإقليمياً وعالمياً، مع الحفاظ على التراث الثقافي والحضاري الغني لمصر.` 
-    },
-    { 
-      id: 'mission', 
-      title: 'رسالتنا', 
-      content: `تلتزم جامعة الأقصر بتقديم تعليم عالي الجودة، وتعزيز البحث العلمي الابتكاري، وخدمة المجتمع من خلال إعداد خريجين مجهزين بالمهارات العملية والنظرية للتفوق في الأسواق الوظيفية المحلية والإقليمية والعالمية.` 
-    },
-    { 
-      id: 'goals', 
-      title: 'أهدافنا', 
-      content: [
-        `إعداد خريجين علمياً ومهنياً مؤهلين قادرين على المنافسة في الأسواق الوظيفية المحلية والإقليمية والعالمية، مع التركيز على تطوير المهارات العملية والنظرية.`,
-        `رفع مستوى البحث العلمي والابتكار في الجامعة من خلال دعم المشاريع البحثية المتميزة وتعزيز التعاون البحثي الدولي.`,
-        `المساهمة في التنمية المجتمعية المستدامة من خلال المبادرات التعليمية والبحثية التي تحافظ على التراث الثقافي وتلبي احتياجات المجتمع.`
-      ]
-    }
-  ];
+  tabs: Tab[] = [];
+
+  constructor(private aboutUniversityService: AboutUniversityService) {}
 
   get activeTabTitle(): string {
     const tab = this.tabs.find(t => t.id === this.activeTab);
@@ -56,6 +39,13 @@ export class VisionMissionGoalsComponent implements OnInit {
   }
 
   ngOnInit() {
+    const data = this.aboutUniversityService.getAboutUniversity();
+    this.tabs = [
+      { id: 'vision', title: 'الرؤية', content: data.vision },
+      { id: 'mission', title: 'الرسالة', content: data.mission },
+      { id: 'goals', title: 'الاهداف', content: data.goals }
+    ];
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {

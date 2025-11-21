@@ -1,0 +1,5 @@
+- [ ] Update TS to group slides into slideGroups of 5 items each
+- [ ] Update slideConfig to slidesToShow: 1
+- [ ] Update HTML to use slideGroups for carousel
+- [ ] Adjust CSS gap and margin for better spacing
+- [ ] Test the slider functionality

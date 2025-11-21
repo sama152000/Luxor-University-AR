@@ -1,118 +1,120 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SlickCarouselModule, SlickCarouselComponent } from 'ngx-slick-carousel';
+import { RouterModule, Router } from '@angular/router';
+import { SlickCarouselComponent, SlickCarouselModule } from 'ngx-slick-carousel';
+import { FacultiesProgramsService } from '../../../Services/faculties-programs.service';
 
 @Component({
   selector: 'app-faculties-slider',
   standalone: true,
-  imports: [CommonModule, SlickCarouselModule],
+  imports: [CommonModule, RouterModule, SlickCarouselModule],
   templateUrl: './faculties-slider.component.html',
   styleUrls: ['./faculties-slider.component.css']
 })
-export class FacultiesSliderComponent implements OnInit {
+export class FacultiesSliderComponent implements OnInit, AfterViewInit {
   @ViewChild('slickModal') slickModal!: SlickCarouselComponent;
 
   isVisible = false;
   isMobile = false;
-
-  slides = [
-    {
-      items: [
-        { type: 'logo', imageUrl: './assets/logo1.png', title: 'Faculty of Arts' },
-        { type: 'logo', imageUrl: './assets/logo2.png', title: 'Faculty of Engineering' },
-        { type: 'pharaonic', imageUrl: './assets/middle.png', title: 'Pharaonic Symbol' },
-        { type: 'logo', imageUrl: './assets/logo3.png', title: 'Faculty of Medicine' },
-        { type: 'logo', imageUrl: './assets/logo5.png', title: 'Faculty of Science' }
-      ]
-    },
-   
-  ];
+  slides: any[] = [];
 
   slideConfig = {
     slidesToShow: 5,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 5000,
+    autoplaySpeed: 4000,
     pauseOnHover: true,
     infinite: true,
     arrows: true,
     dots: true,
     centerMode: true,
-    centerPadding: '40px', /* Larger gap for center image */
+    centerPadding: '60px',
+    focusOnSelect: true,
     responsive: [
       {
+        breakpoint: 1200,
+        settings: { slidesToShow: 3, centerPadding: '40px' }
+      },
+      {
         breakpoint: 992,
-        settings: {
-          slidesToShow: 3,
-          centerPadding: '30px'
-        }
+        settings: { slidesToShow: 3, centerPadding: '30px' }
       },
       {
         breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-          centerPadding: '20px'
-        }
+        settings: { slidesToShow: 1, centerPadding: '20px' }
       }
     ]
   };
 
+  constructor(
+    private facultiesService: FacultiesProgramsService,
+    private router: Router
+  ) {}
+
   ngOnInit() {
     this.checkMobile();
+    this.loadSlides();
 
-    // Ensure jQuery and Slick are loaded before initializing
-    this.waitForLibraries();
-
+    // Intersection Observer للأنيميشن عند الظهور
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          this.isVisible = true;
-        }
-      });
-    }, { threshold: 0.2 });
+      if (entries[0].isIntersecting) {
+        this.isVisible = true;
+        observer.unobserve(entries[0].target);
+      }
+    }, { threshold: 0.1 });
 
     setTimeout(() => {
-      const element = document.querySelector('.faculties-slider-section');
-      if (element) {
-        observer.observe(element);
-      }
+      const el = document.querySelector('.faculties-slider-section');
+      if (el) observer.observe(el);
     }, 100);
 
-    window.addEventListener('resize', () => {
-      this.checkMobile();
-    });
+    window.addEventListener('resize', () => this.checkMobile());
   }
 
-  private waitForLibraries() {
-    // Wait for jQuery and Slick to be available
-    const checkLibraries = () => {
-      if (typeof (window as any).jQuery !== 'undefined' && typeof (window as any).jQuery.fn.slick !== 'undefined') {
-        // Libraries are loaded, component can proceed
-        console.log('jQuery and Slick loaded successfully');
-      } else {
-        // Retry after a short delay
-        setTimeout(checkLibraries, 100);
+  ngAfterViewInit() {
+    // تأكد إن السلايدر يتحدث بعد إضافة العنصر الفرعوني
+    setTimeout(() => {
+      if (this.slickModal && !this.isMobile) {
+        this.slickModal.unslick();
+        this.slickModal.initSlick();
       }
-    };
-    checkLibraries();
+    }, 300);
+  }
+
+  loadSlides() {
+    this.facultiesService.getFacultiesSlider().subscribe(data => {
+      this.slides = data.map(item => ({
+        type: 'logo',
+        imageUrl: item.imageUrl,
+        title: item.title
+      }));
+
+      // نضيف اللوجو الفرعوني الكبير في النص (أو في البداية لو حابة)
+      this.slides.splice(Math.floor(this.slides.length / 2), 0, {
+        type: 'pharaonic',
+        imageUrl: '/assets/middle.png',  // أو '/assets/pharaonic-center.png'
+        title: 'جامعة الأقصر'
+      });
+    });
   }
 
   checkMobile() {
     this.isMobile = window.innerWidth < 768;
   }
 
-  public pauseSlider() {
-    if (this.slickModal) {
-      this.slickModal.unslick();
+  pauseSlider() {
+    if (this.slickModal && !this.isMobile) {
+      this.slickModal.slickPause();
     }
   }
 
-  public resumeSlider() {
-    if (this.slickModal) {
-      // Re-initialize slick after a delay to ensure DOM is ready
-      setTimeout(() => {
-        this.slickModal.initSlick();
-      }, 100);
+  resumeSlider() {
+    if (this.slickModal && !this.isMobile) {
+      this.slickModal.slickPlay();
     }
+  }
+
+  navigateToFaculties() {
+    this.router.navigate(['/faculties']);
   }
 }

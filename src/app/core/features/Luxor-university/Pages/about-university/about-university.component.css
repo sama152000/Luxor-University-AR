@@ -1,10 +1,11 @@
 /* About University Section */
 .about-university-section {
   position: relative;
-  min-height: 85vh;
+  min-height: 60vh;
   padding: var(--section-padding);
   background: var(--bg-light);
   overflow: hidden;
+
 }
 
 /* Subtle Background Pattern */

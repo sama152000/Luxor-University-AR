@@ -1,0 +1,469 @@
+/* ======================================================
+   STUDENT LIFE COMPONENT – FULL ENGLISH & PROFESSIONAL CSS
+   Luxor University – Faculty of Education (Official Colors)
+   ====================================================== */
+
+.student-life-page {
+  min-height: 80vh;
+  direction: ltr;
+  text-align: left;
+  padding: var(--section-padding);
+}
+
+/* Loading State */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  gap: 1.5rem;
+  color: var(--primary-color);
+    background: var(--bg-light);
+
+}
+.loading-container i {
+  font-size: 3.5rem;
+  color: var(--accent-color);
+  animation: spin 1.5s linear infinite;
+}
+
+/* Main Layout – Sidebar + Detail */
+.activities-layout {
+  display: flex;
+  min-height: 80vh;
+  background: white;
+  border-radius: 18px;
+  overflow: hidden;
+  margin: 2.5rem auto;
+  max-width:100%;
+  box-shadow: 0 10px 40px rgba(23, 28, 70, 0.08);
+}
+
+/* ==================== SIDEBAR ==================== */
+.activities-sidebar {
+  width: 400px;
+  color:var(--primary-color);
+  overflow-y: auto;
+  position: sticky;
+  top: 0;
+  height: 600px;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-header {
+  padding: 2.2rem 2rem;
+  background: rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sidebar-header h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.count {
+  background: var(--accent-color);
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.sidebar-list {
+  padding: 1rem 0;
+}
+
+.activity-item {
+  display: flex;
+  align-items: center;
+  padding: 1.3rem 2rem;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.activity-item:hover {
+  background: rgba(255, 255, 255, 0.12);
+  padding-left: 2.4rem;
+}
+
+.activity-item.active {
+  background: var(--accent-color);
+  font-weight: 600;
+  box-shadow: inset 5px 0 0 white;
+}
+
+.item-image {
+  width: 64px;
+  height: 64px;
+  border-radius: 14px;
+  overflow: hidden;
+  flex-shrink: 0;
+  margin-right: 1.2rem;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.activity-item:hover img {
+  transform: scale(1.1);
+}
+
+.item-info h4 {
+  margin: 0 0 0.4rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.item-info .category {
+  font-size: 0.9rem;
+  opacity: 0.92;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.item-info .schedule {
+  font-size: 0.85rem;
+  opacity: 0.88;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.indicator {
+  position: absolute;
+  right: 16px;
+  font-size: 1.3rem;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.activity-item:hover .indicator,
+.activity-item.active .indicator {
+  opacity: 1;
+  right: 12px;
+}
+
+.activity-item.active .indicator {
+  color: white;
+  font-weight: bold;
+}
+
+/* ==================== DETAIL AREA ==================== */
+.activity-detail {
+  flex: 1;
+  padding: 4rem;
+  background: white;
+  overflow-y: auto;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 2.5rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+  color: var(--accent-color);
+  gap: 1rem;
+}
+
+.detail-header {
+  display: flex;
+  gap: 3rem;
+  margin-bottom: 3.5rem;
+  align-items: flex-start;
+}
+
+.detail-image {
+  width: 420px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 20px;
+  flex-shrink: 0;
+  box-shadow: 0 15px 40px rgba(23, 28, 70, 0.18);
+  transition: transform 0.4s ease;
+}
+
+.detail-image:hover {
+  transform: translateY(-8px);
+}
+
+.header-info {
+  flex: 1;
+}
+
+.category-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 1.2rem;
+  backdrop-filter: blur(8px);
+}
+
+.header-info h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--dark-primary-color);
+  margin: 0 0 1.2rem;
+  line-height: 1.15;
+  letter-spacing: -0.8px;
+}
+
+.header-info .description {
+  font-size: 1.3rem;
+  color: #475569;
+  line-height: 1.8;
+  margin-bottom: 0;
+}
+
+/* Info Grid */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3.5rem;
+}
+
+.info-card {
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  padding: 2rem;
+  border-radius: 18px;
+  border-left: 6px solid var(--accent-color);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  transition: all 0.35s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+}
+
+.info-card:hover {
+  background: #fffbeb;
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(228, 144, 23, 0.15);
+}
+
+.info-card i {
+  font-size: 2.2rem;
+  color: var(--accent-color);
+}
+
+.info-card strong {
+  display: block;
+  font-size: 1.1rem;
+  color: var(--dark-primary-color);
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+}
+
+.info-card p {
+  margin: 0;
+  color: #555;
+  font-size: 1.05rem;
+}
+
+/* Tags & Actions */
+.tags-section {
+  margin-bottom: 4rem;
+}
+
+.tags-section strong {
+  display: block;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.actions {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+/* No Selection Placeholder */
+.no-selection {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  text-align: center;
+  color: #94a3b8;
+}
+
+.placeholder i {
+  font-size: 6rem;
+  margin-bottom: 2rem;
+  opacity: 0.25;
+}
+
+.placeholder h2 {
+  font-size: 2.4rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.placeholder p {
+  font-size: 1.2rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Contact Section */
+.contact-section {
+  padding: 6rem 0;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--dark-primary-color) 100%);
+  color: white;
+  margin-top: 4rem;
+}
+
+.contact-content {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.contact-title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.contact-title i {
+  color: var(--accent-color);
+  font-size: 3rem;
+}
+
+.contact-text {
+  font-size: 1.3rem;
+  opacity: 0.95;
+  line-height: 1.8;
+  margin-bottom: 3rem;
+}
+
+.contact-btn {
+  background: var(--accent-color) !important;
+  border: none !important;
+  padding: 1rem 3rem !important;
+  font-size: 1.2rem !important;
+  font-weight: 700 !important;
+  border-radius: 50px !important;
+  min-width: 220px;
+}
+
+/* PrimeNG Custom Styles */
+:host ::ng-deep .pharaonic-chip {
+  background: #fff4e6 !important;
+  color: var(--dark-accent-color) !important;
+  border: 2px solid var(--accent-color) !important;
+  font-weight: 700 !important;
+  padding: 0.5rem 1rem !important;
+}
+
+:host ::ng-deep .pharaonic-btn-primary {
+  background: var(--accent-color) !important;
+  border: none !important;
+  border-radius: 50px !important;
+  padding: 0.9rem 2.5rem !important;
+  font-weight: 700 !important;
+  font-size: 1.1rem !important;
+  transition: all 0.3s ease !important;
+}
+
+:host ::ng-deep .pharaonic-btn-primary:hover {
+  background: #d67d00 !important;
+  transform: translateY(-4px);
+  box-shadow: 0 15px 30px rgba(228, 144, 23, 0.4) !important;
+}
+
+:host ::ng-deep .pharaonic-btn-secondary {
+  border: 2.5px solid var(--primary-color) !important;
+  color: var(--primary-color) !important;
+  background: transparent !important;
+  border-radius: 50px !important;
+  font-weight: 700 !important;
+  padding: 0.9rem 2.5rem !important;
+}
+
+:host ::ng-deep .pharaonic-btn-secondary:hover {
+  background: var(--primary-color) !important;
+  color: white !important;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .detail-header { gap: 2rem; }
+  .detail-image { width: 350px; height: 260px; }
+}
+
+@media (max-width: 992px) {
+  .activities-layout {
+    flex-direction: column;
+    margin: 1.5rem;
+    border-radius: 14px;
+  }
+  .activities-sidebar {
+    width: 100%;
+    height: 50vh;
+    max-height: 500px;
+  }
+  .detail-header {
+    flex-direction: column;
+  }
+  .detail-image {
+    width: 100%;
+    height: 280px;
+  }
+  .activity-detail {
+    padding: 3rem 2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .header-info h1 { font-size: 2.4rem; }
+  .info-grid { grid-template-columns: 1fr; }
+  .actions { flex-direction: column; }
+  .activity-item { padding: 1rem 1.5rem; }
+  .activity-item:hover { padding-left: 1.5rem; }
+}
+
+/* Animation */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

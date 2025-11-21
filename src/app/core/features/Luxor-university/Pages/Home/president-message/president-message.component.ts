@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { PresidentMessageService } from '../../../Services/president-message.service';
+import { PresidentMessage } from '../../../model/president-message.model';
 
 @Component({
   selector: 'app-president-message',
@@ -10,17 +12,13 @@ import { CommonModule } from '@angular/common';
 })
 export class PresidentMessageComponent implements OnInit {
   isVisible = false;
+  presidentData!: PresidentMessage;
 
-  presidentData = {
-    name: ' الدكتورة صبرين جابر عبد الجليل',
-    title: 'رئيس الجامعة',
-    image: './assets/president.jpg',
-    message: `يسعدني أن أرحب بكم في جامعة الأقصر، الجامعة المتميزة التي تُعدّ منارة للمعرفة والتنوير في صعيد مصر. نفخر بتاريخنا العريق والتراث الثقافي الغني الذي يمتد لآلاف السنين.
-
-تسعى جامعة الأقصر للتميز في التعليم العالي والبحث العلمي، وإعداد خرّيجين مؤهلين لمنافسة الأسواق الوظيفية المحلية والإقليمية والعالمية. نؤمن بتطوير مهارات الطلاب وتمكينهم ليكونوا قادة الغد.`
-  };
+  constructor(private presidentMessageService: PresidentMessageService) {}
 
   ngOnInit() {
+    this.presidentData = this.presidentMessageService.getPresidentMessage();
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {

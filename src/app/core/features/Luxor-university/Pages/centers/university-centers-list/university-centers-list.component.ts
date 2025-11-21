@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CentersService } from '../../../Services/centers.service';
 import { Center } from '../../../model/centers.model';
-import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { PageHeaderComponent } from '../../shared/page-header/page-header.component';
@@ -14,7 +13,7 @@ import { FooterComponent } from '../../shared/footer/footer.component';
 @Component({
   selector: 'app-university-centers-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, InputTextModule, ButtonModule, CardModule, PageHeaderComponent, FooterComponent],
+  imports: [CommonModule, FormsModule, RouterModule, ButtonModule, CardModule, PageHeaderComponent, FooterComponent],
   templateUrl: './university-centers-list.component.html',
   styleUrls: ['./university-centers-list.component.css']
 })

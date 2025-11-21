@@ -1,16 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-interface FooterLink {
-  label: string;
-  link: string;
-}
-
-interface SocialLink {
-  icon: string;
-  link: string;
-  label: string;
-}
+import { FooterService } from '../../../Services/footer.service';
+import { FooterData } from '../../../model/footer.model';
 
 @Component({
   selector: 'app-footer',
@@ -19,40 +10,35 @@ interface SocialLink {
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.css']
 })
-export class FooterComponent {
+export class FooterComponent implements OnInit {
   currentYear = new Date().getFullYear();
+  footerData: FooterData | null = null;
 
-  universityInfo = {
-    description: 'جامعة الأقصر هي مؤسسة أكاديمية ملتزمة بتقديم تعليم وأبحاث عالية الجودة.',
-    slogan: 'من تراث حضارتنا نشكّل المستقبل.'
-  };
+  constructor(private footerService: FooterService) {}
 
-  quickLinks: FooterLink[] = [
-    { label: 'الرئيسية', link: '#home' },
-    { label: 'عن الجامعة', link: '#about' },
-    { label: 'الكليات والبرامج', link: '#faculties' },
-    { label: 'حياة الطالب', link: '#student-life' },
-    { label: 'اتصل بنا', link: '#contact' }
-  ];
+  ngOnInit() {
+    this.footerService.getFooterData().subscribe(data => {
+      this.footerData = data;
+    });
+  }
 
-  importantLinks: FooterLink[] = [
-    { label: 'مجلس الجامعة', link: '#council' },
-    { label: 'أعضاء هيئة التدريس', link: '#faculty' },
-    { label: 'الدراسات العليا', link: '#postgraduate' },
-    { label: 'الشؤون الإدارية', link: '#administration' },
-    { label: 'التقويم الأكاديمي', link: '#calendar' }
-  ];
+  get universityInfo() {
+    return this.footerData?.universityInfo || { description: '', slogan: '' };
+  }
 
-  contactInfo = {
-    address: 'الأقصر، طريق السبعة أبو الهول، جمهورية مصر العربية',
-    phone: '+20 95 000 0000',
-    email: 'info@luxoruniv.edu.eg'
-  };
+  get quickLinks() {
+    return this.footerData?.quickLinks || [];
+  }
 
-  socialLinks: SocialLink[] = [
-    { icon: 'pi-facebook', link: '#', label: 'فيسبوك' },
-    { icon: 'pi-twitter', link: '#', label: 'إكس' },
-    { icon: 'pi-linkedin', link: '#', label: 'لينكدإن' },
-    { icon: 'pi-youtube', link: '#', label: 'يوتيوب' }
-  ];
+  get importantLinks() {
+    return this.footerData?.importantLinks || [];
+  }
+
+  get contactInfo() {
+    return this.footerData?.contactInfo || { address: '', phone: '', email: '' };
+  }
+
+  get socialLinks() {
+    return this.footerData?.socialLinks || [];
+  }
 }

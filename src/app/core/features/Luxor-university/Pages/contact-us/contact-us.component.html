@@ -1,4 +1,4 @@
-<app-page-header></app-page-header>
+i<app-page-header></app-page-header>
 
 <section class="contact-section">
   <div class="container-fluid">
@@ -109,11 +109,9 @@
           </form>
 
           <!-- Success Message -->
-          <p-message 
-            *ngIf="formSubmitted" 
-            severity="success" 
-            text="شكراً لك! تم إرسال رسالتك بنجاح. سنرد خلال 24 ساعة.">
-          </p-message>
+          <div *ngIf="formSubmitted" class="alert alert-success">
+            شكراً لك! تم إرسال رسالتك بنجاح. سنرد خلال 24 ساعة.
+          </div>
         </div>
       </div>
     </div>

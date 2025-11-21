@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PageHeaderComponent } from '../shared/page-header/page-header.component';
 import { FooterComponent } from '../shared/footer/footer.component';
-import { VisionMissionService } from '../../Services/vision-mission.service';
+import { AboutUniversityService } from '../../Services/about-university.service';
 import { NavbarComponent } from "../shared/navbar/navbar.component";
 
 interface Tab {
@@ -24,7 +24,7 @@ export class AboutUniversityComponent implements OnInit {
   activeTab = 'vision';
   tabs: Tab[] = [];
 
-  constructor(private visionMissionService: VisionMissionService) {}
+  constructor(private aboutUniversityService: AboutUniversityService) {}
 
   get activeTabTitle(): string {
     const tab = this.tabs.find(t => t.id === this.activeTab);
@@ -42,30 +42,31 @@ export class AboutUniversityComponent implements OnInit {
   }
 
   ngOnInit() {
+    const data = this.aboutUniversityService.getAboutUniversity();
     this.tabs = [
       {
         id: 'vision',
         title: 'رؤيتنا',
         icon: 'pi pi-eye',
-        content: this.visionMissionService.getVision()
+        content: data.vision
       },
       {
         id: 'mission',
         title: 'رسالتنا',
         icon: 'pi pi-flag',
-        content: this.visionMissionService.getMission()
+        content: data.mission
       },
       {
         id: 'goals',
-        title: 'أهدافنا',
+        title: 'اهدافنا',
         icon: 'pi pi-bullseye',
-        content: this.visionMissionService.getGoals()
+        content: data.goals
       },
       {
         id: 'history',
-        title: 'تاريخنا',
+        title: 'تاريخ الكلية',
         icon: 'pi pi-history',
-        content: this.visionMissionService.getHistory()
+        content: data.history
       }
     ];
 
