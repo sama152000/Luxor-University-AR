@@ -1,45 +1,41 @@
 <section class="faculties-slider-section">
   <div class="container-fluid px-4 px-lg-5">
-    <!-- العنوان الفرعوني -->
+
+    <!-- العنوان -->
     <div class="section-header text-center mb-5" [class.visible]="isVisible">
       <h2 class="section-title">
-        <i class="pi pi-book me-3"></i>كلياتنا ومعاهدنا
-      </h2>
+كلياتنا ومعاهدنا       </h2>
       <p class="section-subtitle mt-3">
-        اكتشف التميز الأكاديمي والتنوع العلمي في جامعة الأقصر
+        اكتشف التنوع الأكاديمي والتميز العلمي في جامعة الأقصر
       </p>
       <div class="pharaonic-divider">
         <div class="divider-line"></div>
-        <div class="lotus-ornament">
-          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="12" fill="#f0a500"/>
-            <path d="M50 10 L60 40 L90 40 L65 60 L75 90 L50 70 L25 90 L35 60 L10 40 L40 40 Z" fill="#f0a500"/>
-          </svg>
-        </div>
+        <img src="/assets/icon.png" alt="Icon" class="lotus-ornament">
         <div class="divider-line reverse"></div>
       </div>
     </div>
 
     <!-- السلايدر -->
     <div class="slider-container" [class.visible]="isVisible">
-      
-      <!-- Desktop & Tablet: ngx-slick-carousel -->
+
+      <!-- Desktop & Tablet: Slick Carousel مع RTL كامل -->
       <ngx-slick-carousel 
         #slickModal 
         class="carousel" 
         [config]="slideConfig" 
+        rtl="true"
         *ngIf="!isMobile && slides.length > 0">
-        
-        <div ngxSlickItem *ngFor="let item of slides" class="slide px-2">
+
+        <div ngxSlickItem *ngFor="let item of slides" class="slide px-3">
           <div 
             class="faculty-item"
             [class.pharaonic]="item.type === 'pharaonic'"
             (click)="item.type !== 'pharaonic' ? navigateToFaculties() : null"
             (mouseenter)="item.type !== 'pharaonic' ? pauseSlider() : null"
             (mouseleave)="resumeSlider()">
-            
+
             <img [src]="item.imageUrl" [alt]="item.title" class="faculty-image">
-            
+
             <div class="item-overlay" *ngIf="item.type !== 'pharaonic'">
               <div class="overlay-content">
                 <h4 class="overlay-title">{{ item.title }}</h4>
@@ -49,7 +45,7 @@
         </div>
       </ngx-slick-carousel>
 
-      <!-- Mobile: Scroll أفقي عادي (بدون Slick) -->
+      <!-- Mobile: Scroll أفقي ناعم -->
       <div class="mobile-faculty-items" *ngIf="isMobile">
         <div 
           class="faculty-item" 
@@ -64,6 +60,7 @@
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>

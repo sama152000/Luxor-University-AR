@@ -5,12 +5,6 @@
   overflow: hidden;
 }
 
-/* إخفاء أي faculty-items قديمة تمامًا */
-.faculty-items {
-  display: none !important;
-}
-
-/* ================== الأساسيات ================== */
 .section-header {
   position: relative;
   z-index: 2;
@@ -61,6 +55,7 @@
 }
 
 .lotus-ornament {
+  position: relative;
   width: 60px;
   height: 60px;
   display: flex;
@@ -68,7 +63,27 @@
   justify-content: center;
 }
 
-/* ================== السلايدر الأساسي (ngx-slick) ================== */
+.lotus-petal {
+  position: absolute;
+  width: 20px;
+  height: 30px;
+  background: var(--accent-color, #f0a500);
+  border-radius: 50% 50% 0 0;
+  transform-origin: bottom center;
+}
+
+.lotus-petal:nth-child(1) {
+  transform: rotate(0deg);
+}
+
+.lotus-petal:nth-child(2) {
+  transform: rotate(120deg);
+}
+
+.lotus-petal:nth-child(3) {
+  transform: rotate(240deg);
+}
+
 .slider-container {
   position: relative;
   z-index: 2;
@@ -82,134 +97,224 @@
   transform: translateY(0);
 }
 
-/* كل عنصر في السلايدر */
+.carousel {
+  position: relative;
+  width: 100%;
+}
+
+.faculty-items {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
+  gap: 0;
+}
+
 .faculty-item {
-  flex: 0 0 auto;
-  max-width: 220px;
-  height: 220px;
-  margin: 0 15px;
+  flex: 1;
+  max-width: 200px;
+  height: 200px;
   position: relative;
   overflow: hidden;
-  border-radius: 20px;
-  transition: all 0.4s ease;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-  background: rgba(255,255,255,0.95);
+  transition: all 0.3s ease;
+  margin: 0 8px;
+}
+
+.faculty-item:not(.pharaonic) {
+  cursor: pointer;
 }
 
 .faculty-item.pharaonic {
-  max-width: 340px !important;
-  height: 340px;
-  margin: 0 20px !important;
-  transform: scale(1.15);
-  z-index: 10;
-  box-shadow: 0 25px 60px rgba(240, 165, 0, 0.7);
+  max-width: 300px;
+  height: 300px;
+  flex: 1.4;
+  margin: 0 12px;
 }
 
 .faculty-item:hover:not(.pharaonic) {
-  transform: scale(1.08);
-  box-shadow: 0 20px 50px rgba(240, 165, 0, 0.7);
-  z-index: 5;
+  transform: scale(1.05);
+  box-shadow: 0 15px 40px rgba(228, 144, 23, 0.6);
 }
 
 .faculty-image {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  padding: 15px;
 }
 
 .item-overlay {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(23,28,70,0.95), rgba(39,48,117,0.95));
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(23, 28, 70, 0.95), rgba(39, 48, 117, 0.95));
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1rem;
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.3s ease;
 }
 
 .faculty-item:hover .item-overlay {
   opacity: 1;
 }
 
-.overlay-title {
-  color: #f0a500;
-  font-weight: 800;
-  font-size: 1.1rem;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+.overlay-content {
+  text-align: center;
+  color: white;
 }
 
-/* الأسهم والنقط */
+.overlay-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--accent-color, #f0a500);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
 .slick-arrow {
-  background: rgba(255,255,255,0.15);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  z-index: 10;
+  width: 45px;
+  height: 45px;
+  z-index: 3;
+  transition: all 0.3s ease;
 }
 
 .slick-arrow:hover {
-  background: #f0a500;
+  background: var(--accent-color, #f0a500);
 }
 
-.slick-prev { left: 15px; }
-.slick-next { right: 15px; }
+.slick-prev {
+  left: 10px;
+}
+
+.slick-next {
+  right: 10px;
+}
+
+.slick-dots {
+  bottom: -45px;
+}
 
 .slick-dots li button:before {
-  color: #f0a500;
   font-size: 14px;
+  color: var(--accent-color, #f0a500);
+  opacity: 0.5;
 }
 
 .slick-dots li.slick-active button:before {
+  color: var(--accent-color, #f0a500);
   opacity: 1;
 }
 
-/* ================== موبايل (scroll أفقي) ================== */
-.mobile-faculty-items {
-  display: flex;
-  overflow-x: auto;
-  padding: 30px 10px;
-  gap: 25px;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
+@media (max-width: 991px) {
+  .faculty-items {
+    padding: 0 15px;
+  }
+
+  .faculty-item {
+    max-width: 110px;
+    height: 110px;
+    margin: 0 6px;
+  }
+
+  .faculty-item.pharaonic {
+    max-width: 150px;
+    height: 150px;
+    margin: 0 8px;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .overlay-title {
+    font-size: 0.8rem;
+  }
 }
 
-.mobile-faculty-items::-webkit-scrollbar {
-  display: none;
-}
+@media (max-width: 767px) {
+  .faculties-slider-section {
+    padding: 4rem 1rem;
+  }
 
-.mobile-faculty-items .faculty-item {
-  scroll-snap-align: center;
-  flex: 0 0 280px;
-  max-width: 280px;
-  height: 240px;
-}
+  .faculty-items {
+    padding: 0 10px;
+  }
 
-.mobile-faculty-items .faculty-item.pharaonic {
-  flex: 0 0 380px;
-  max-width: 380px;
-  height: 380px;
-}
+  .faculty-item {
+    max-width: 90px;
+    height: 90px;
+    margin: 0 4px;
+  }
 
-/* ================== Responsive ================== */
-@media (max-width: 1200px) {
-  .faculty-item { max-width: 200px; height: 200px; }
-  .faculty-item.pharaonic { max-width: 300px; height: 300px; }
-}
+  .faculty-item.pharaonic {
+    max-width: 120px;
+    height: 120px;
+    margin: 0 6px;
+  }
 
-@media (max-width: 992px) {
-  .faculty-item { max-width: 180px; height: 180px; margin: 0 10px; }
-  .faculty-item.pharaonic { max-width: 260px; height: 260px; }
-}
+  .section-title {
+    font-size: 1.8rem;
+  }
 
-@media (max-width: 768px) {
-  .section-title { font-size: 2rem; }
-  .faculties-slider-section { padding: 80px 0; }
+  .overlay-title {
+    font-size: 0.75rem;
+  }
+
+  .slick-prev, .slick-next {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 @media (max-width: 480px) {
-  .mobile-faculty-items .faculty-item { flex: 0 0 220px; height: 200px; }
-  .mobile-faculty-items .faculty-item.pharaonic { flex: 0 0 300px; height: 300px; }
+  .faculty-item {
+    max-width: 75px;
+    height: 75px;
+    margin: 0 3px;
+  }
+
+  .faculty-item.pharaonic {
+    max-width: 100px;
+    height: 100px;
+    margin: 0 5px;
+  }
+}
+
+.mobile-faculty-items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.mobile-faculty-items .faculty-item {
+  flex: none;
+  max-width: 250px;
+  height: 200px;
+  margin: 0;
+  width: 100%;
+  max-width: 300px;
+}
+
+.mobile-faculty-items .faculty-item.pharaonic {
+  max-width: 350px;
+  height: 350px;
+}
+
+.mobile-faculty-items .faculty-item:hover:not(.pharaonic) {
+  transform: scale(1.05);
+  box-shadow: 0 15px 40px rgba(228, 144, 23, 0.6);
+}
+
+.mobile-faculty-items .overlay-title {
+  font-size: 1rem;
 }
