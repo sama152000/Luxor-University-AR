@@ -6,4 +6,5 @@ export interface Center {
   place?: string;
   subTitle?: string;
   vision?: string;
+  about?: string;
 }

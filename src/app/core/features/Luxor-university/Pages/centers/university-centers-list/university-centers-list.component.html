@@ -1,5 +1,3 @@
-<!-- <app-page-header /> -->
-
 <app-page-header
   [title]="'مراكز الجامعة'"
   [breadcrumbs]="[{ label: 'المراكز' }]"
@@ -9,29 +7,29 @@
   <div class="container-fluid py-5">
     <div class="row">
       <!-- 🔥 Sidebar -->
-      <div class="col-lg-3 col-md-4 mb-4">
+      <div class="col-lg-4 col-md-3 mb-3">
         <div class="sidebar">
           <h2 class="section-title2 mb-4">مراكز الجامعة</h2>
 
           @for (center of centersList; track center.id) {
-          <div>
+          <div class="sidebar-item">
+            <i class="pi pi-building me-2"></i>
             {{ center.pageName }}
           </div>
           }
           <!-- <div
             class="sidebar-item"
-            *ngFor="let center of centers"
+            *ngFor="let center of centersList"
             [class.active]="selectedCenterId === center.id"
-            (click)="selectCenter(center.id)"
-          >
+            (click)="selectCenter(center.id)">
             <i class="pi pi-building me-2"></i>
-            {{ center.name }}
+            {{ center.pageName }}
           </div> -->
         </div>
       </div>
 
       <!-- 🔥 Main Content -->
-      <div class="col-lg-9 col-md-8">
+      <div class="col-lg-8 col-md-8">
         <!-- Search Bar -->
         <div class="search-bar mb-5">
           <span class="p-input-icon-left w-100">
@@ -56,7 +54,7 @@
             <p-card class="center-card" [attr.id]="center.id">
               <div class="card-body">
                 <h3 class="card-title">{{ center.pageName }}</h3>
-                <p class="card-text">{{ center.description }}</p>
+                <p class="card-text">{{ center.about }}</p>
                 <a
                   routerLink="/centers/{{ center.id }}"
                   class="btn btn-primary-custom"
@@ -71,5 +69,3 @@
     </div>
   </div>
 </section>
-
-<!-- <app-footer></app-footer> -->
