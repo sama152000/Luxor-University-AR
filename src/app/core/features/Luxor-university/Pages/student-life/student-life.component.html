@@ -1,11 +1,9 @@
-<app-navbar></app-navbar>
+<!-- <app-navbar></app-navbar> -->
 <app-page-header></app-page-header>
 
 <div class="student-life-page">
-
   <!-- التخطيط الرئيسي: شريط جانبي + تفاصيل -->
   <div class="activities-layout" *ngIf="!loading">
-    
     <!-- الشريط الجانبي -->
     <aside class="activities-sidebar">
       <div class="sidebar-header">
@@ -13,14 +11,14 @@
       </div>
 
       <div class="sidebar-list">
-        <div 
+        <div
           class="activity-item"
           *ngFor="let activity of filteredActivities"
           [class.active]="selectedActivity?.id === activity.id"
           (click)="selectActivity(activity)"
         >
           <div class="item-image">
-            <img [src]="getActivityImage(activity)" [alt]="activity.title">
+            <img [src]="getActivityImage(activity)" [alt]="activity.title" />
           </div>
           <div class="item-info">
             <h4>{{ activity.title }}</h4>
@@ -41,10 +39,19 @@
       </button>
 
       <div class="detail-header">
-        <img [src]="getActivityImage(selectedActivity)" [alt]="selectedActivity.title" class="detail-image">
-        
+        <img
+          [src]="getActivityImage(selectedActivity)"
+          [alt]="selectedActivity.title"
+          class="detail-image"
+        />
+
         <div class="header-info">
-          <span class="category-badge" [style.background-color]="getCategoryColor(selectedActivity.category)">
+          <span
+            class="category-badge"
+            [style.background-color]="
+              getCategoryColor(selectedActivity.category)
+            "
+          >
             <i [class]="getCategoryIcon(selectedActivity.category)"></i>
             {{ selectedActivity.category.name }}
           </span>
@@ -63,7 +70,7 @@
               <p>{{ selectedActivity.location }}</p>
             </div>
           </div>
-          
+
           <div class="info-card" *ngIf="selectedActivity.schedule">
             <i class="pi pi-clock"></i>
             <div>
@@ -71,8 +78,11 @@
               <p>{{ selectedActivity.schedule }}</p>
             </div>
           </div>
-          
-          <div class="info-card" *ngIf="selectedActivity.contactInfo?.coordinator">
+
+          <div
+            class="info-card"
+            *ngIf="selectedActivity.contactInfo?.coordinator"
+          >
             <i class="pi pi-user"></i>
             <div>
               <strong>المنسق</strong>
@@ -87,7 +97,10 @@
     <ng-template #noSelection>
       <main class="no-selection">
         <div class="placeholder">
-          <i class="pi pi-arrow-right" style="font-size: 5rem; color: #cbd5e1;"></i>
+          <i
+            class="pi pi-arrow-right"
+            style="font-size: 5rem; color: #cbd5e1"
+          ></i>
           <h2>اختر نشاطًا من القائمة</h2>
           <p>اضغط على أي نشاط في الشريط الجانبي لعرض تفاصيله هنا</p>
         </div>
@@ -99,16 +112,19 @@
   <section class="contact-section">
     <div class="container">
       <div class="contact-content">
-        <h2 class="contact-title">
-          <i class="pi pi-phone"></i> تواصل معنا
-        </h2>
+        <h2 class="contact-title"><i class="pi pi-phone"></i> تواصل معنا</h2>
         <p class="contact-text">
           هل أنت جاهز للانضمام إلى الحياة الطلابية النابضة في جامعة الأقصر؟
         </p>
-        <button pButton class="contact-btn pharaonic-btn-primary" label="تواصل معنا" icon="pi pi-send"></button>
+        <button
+          pButton
+          class="contact-btn pharaonic-btn-primary"
+          label="تواصل معنا"
+          icon="pi pi-send"
+        ></button>
       </div>
     </div>
   </section>
 </div>
 
-<app-footer></app-footer>
+<!-- <app-footer></app-footer> -->

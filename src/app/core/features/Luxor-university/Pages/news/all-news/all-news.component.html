@@ -1,10 +1,7 @@
 <app-page-header></app-page-header>
 <div class="all-news-container">
   <!-- Breaking News Banner -->
-  
-   
 
-  
   <!-- Trending Now Section -->
   <div class="trending-section" *ngIf="trendingNews.length > 0">
     <div class="container-fluid">
@@ -47,11 +44,13 @@
                   <i class="pi pi-search"></i>
                   بحث
                 </label>
-                <input type="text" 
-                       class="form-control filter-input" 
-                       [(ngModel)]="searchTerm"
-                       placeholder="ابحث في الأخبار..."
-                       (keyup.enter)="applyFilter()">
+                <input
+                  type="text"
+                  class="form-control filter-input"
+                  [(ngModel)]="searchTerm"
+                  placeholder="ابحث في الأخبار..."
+                  (keyup.enter)="applyFilter()"
+                />
               </div>
             </div>
 
@@ -62,9 +61,15 @@
                   <i class="pi pi-tags"></i>
                   الفئة
                 </label>
-                <select class="form-select filter-input" [(ngModel)]="selectedCategory">
+                <select
+                  class="form-select filter-input"
+                  [(ngModel)]="selectedCategory"
+                >
                   <option value="">جميع الفئات</option>
-                  <option *ngFor="let category of categories" [value]="category">
+                  <option
+                    *ngFor="let category of categories"
+                    [value]="category"
+                  >
                     {{ category }}
                   </option>
                 </select>
@@ -78,9 +83,11 @@
                   <i class="pi pi-calendar"></i>
                   من تاريخ
                 </label>
-                <input type="date" 
-                       class="form-control filter-input" 
-                       [(ngModel)]="dateFrom">
+                <input
+                  type="date"
+                  class="form-control filter-input"
+                  [(ngModel)]="dateFrom"
+                />
               </div>
             </div>
 
@@ -91,24 +98,30 @@
                   <i class="pi pi-calendar"></i>
                   إلى تاريخ
                 </label>
-                <input type="date" 
-                       class="form-control filter-input" 
-                       [(ngModel)]="dateTo">
+                <input
+                  type="date"
+                  class="form-control filter-input"
+                  [(ngModel)]="dateTo"
+                />
               </div>
             </div>
 
             <!-- Filter Buttons -->
             <div class="col-lg-2 col-md-12">
               <div class="filter-actions">
-                <button class="btn btn-primary-custom filter-btn" 
-                        (click)="applyFilter()" 
-                        [disabled]="loading">
+                <button
+                  class="btn btn-primary-custom filter-btn"
+                  (click)="applyFilter()"
+                  [disabled]="loading"
+                >
                   <i class="pi pi-search"></i>
                   تطبيق
                 </button>
-                <button class="btn btn-outline-secondary filter-btn" 
-                        (click)="clearFilter()" 
-                        [disabled]="loading">
+                <button
+                  class="btn btn-outline-secondary filter-btn"
+                  (click)="clearFilter()"
+                  [disabled]="loading"
+                >
                   <i class="pi pi-times"></i>
                   مسح
                 </button>
@@ -119,9 +132,6 @@
       </div>
     </div>
   </div>
-
-
-
 
   <!-- News Grid Section -->
   <div class="news-grid-section">
@@ -142,20 +152,24 @@
           <div class="col-lg-4 col-md-6" *ngFor="let news of allNews">
             <article class="news-card">
               <div class="card-image-container">
-                <img [src]="news.imageUrl" 
-                     [alt]="getNewsTitle(news)" 
-                     class="card-image"
-                     loading="lazy">
+                <img
+                  [src]="news.imageUrl"
+                  [alt]="getNewsTitle(news)"
+                  class="card-image"
+                  loading="lazy"
+                />
                 <div class="card-overlay"></div>
                 <div class="card-badges">
-                  <span class="category-badge">{{ getNewsCategory(news) }}</span>
+                  <span class="category-badge">{{
+                    getNewsCategory(news)
+                  }}</span>
                   <span *ngIf="news.isBreaking" class="breaking-badge">
                     <i class="pi pi-bolt"></i>
                     عاجل
                   </span>
                 </div>
               </div>
-              
+
               <div class="card-content">
                 <div class="card-meta">
                   <span class="news-date">
@@ -167,15 +181,17 @@
                     {{ news.views }}
                   </span>
                 </div>
-                
+
                 <h3 class="card-title">
-                  <a [routerLink]="['/news', news.id]">{{ getNewsTitle(news) }}</a>
+                  <a [routerLink]="['/news', news.id]">{{
+                    getNewsTitle(news)
+                  }}</a>
                 </h3>
-                
+
                 <p class="card-description">
-                  {{ getNewsDescription(news) | slice:0:120 }}...
+                  {{ getNewsDescription(news) | slice : 0 : 120 }}...
                 </p>
-                
+
                 <div class="card-footer">
                   <div class="news-author">
                     <i class="pi pi-user"></i>
@@ -195,9 +211,7 @@
         <div *ngIf="allNews.length === 0" class="no-results">
           <div class="no-results-content">
             <i class="pi pi-info-circle no-results-icon"></i>
-            <h3 class="no-results-title">
-              لم يتم العثور على أخبار
-            </h3>
+            <h3 class="no-results-title">لم يتم العثور على أخبار</h3>
             <p class="no-results-text">
               حاول تعديل الفلاتر أو تحقق لاحقاً للمحتوى الجديد.
             </p>
@@ -214,18 +228,22 @@
           <ul class="pagination custom-pagination">
             <!-- Previous Button -->
             <li class="page-item" [class.disabled]="currentPage === 1">
-              <button class="page-link" 
-                      (click)="onPageChange(currentPage - 1)"
-                      [disabled]="currentPage === 1">
+              <button
+                class="page-link"
+                (click)="onPageChange(currentPage - 1)"
+                [disabled]="currentPage === 1"
+              >
                 <i class="pi pi-chevron-left"></i>
                 السابق
               </button>
             </li>
 
             <!-- Page Numbers -->
-            <li class="page-item" 
-                *ngFor="let page of getPaginationArray()"
-                [class.active]="page === currentPage">
+            <li
+              class="page-item"
+              *ngFor="let page of getPaginationArray()"
+              [class.active]="page === currentPage"
+            >
               <button class="page-link" (click)="onPageChange(page)">
                 {{ page }}
               </button>
@@ -233,16 +251,18 @@
 
             <!-- Next Button -->
             <li class="page-item" [class.disabled]="currentPage === totalPages">
-              <button class="page-link" 
-                      (click)="onPageChange(currentPage + 1)"
-                      [disabled]="currentPage === totalPages">
+              <button
+                class="page-link"
+                (click)="onPageChange(currentPage + 1)"
+                [disabled]="currentPage === totalPages"
+              >
                 التالي
                 <i class="pi pi-chevron-right"></i>
               </button>
             </li>
           </ul>
         </nav>
-        
+
         <div class="pagination-info">
           <span>
             عرض
@@ -258,4 +278,4 @@
   </div>
 </div>
 
-<app-footer></app-footer>
+<!-- <app-footer></app-footer> -->

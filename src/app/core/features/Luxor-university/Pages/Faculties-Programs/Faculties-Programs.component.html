@@ -7,8 +7,13 @@
       <div class="header-decoration">
         <div class="pyramid-icon">
           <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <path d="M50 10 L90 90 L10 90 Z" fill="currentColor"/>
-            <path d="M50 20 L80 80 L20 80 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+            <path d="M50 10 L90 90 L10 90 Z" fill="currentColor" />
+            <path
+              d="M50 20 L80 80 L20 80 Z"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
           </svg>
         </div>
       </div>
@@ -17,9 +22,30 @@
       <div class="header-decoration right">
         <div class="ankh-symbol">
           <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="25" r="15" fill="none" stroke="currentColor" stroke-width="3"/>
-            <line x1="50" y1="40" x2="50" y2="90" stroke="currentColor" stroke-width="3"/>
-            <line x1="30" y1="55" x2="70" y2="55" stroke="currentColor" stroke-width="3"/>
+            <circle
+              cx="50"
+              cy="25"
+              r="15"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3"
+            />
+            <line
+              x1="50"
+              y1="40"
+              x2="50"
+              y2="90"
+              stroke="currentColor"
+              stroke-width="3"
+            />
+            <line
+              x1="30"
+              y1="55"
+              x2="70"
+              y2="55"
+              stroke="currentColor"
+              stroke-width="3"
+            />
           </svg>
         </div>
       </div>
@@ -27,14 +53,19 @@
 
     <!-- شبكة الكليات -->
     <div class="faculties-grid">
-      <div class="faculty-card" 
-           *ngFor="let faculty of faculties; let i = index" 
-           [style.animation-delay]="'0.' + (i * 0.1) + 's'"
-           (click)="selectFaculty(faculty)">
-        
+      <div
+        class="faculty-card"
+        *ngFor="let faculty of faculties; let i = index"
+        [style.animation-delay]="'0.' + i * 0.1 + 's'"
+        (click)="selectFaculty(faculty)"
+      >
         <div class="card-overlay"></div>
-        <img [src]="faculty.imageUrl" [alt]="faculty.name" class="faculty-image">
-        
+        <img
+          [src]="faculty.imageUrl"
+          [alt]="faculty.name"
+          class="faculty-image"
+        />
+
         <div class="card-content">
           <h3 class="faculty-name">{{ faculty.name }}</h3>
           <p class="faculty-description">{{ faculty.description }}</p>
@@ -48,4 +79,4 @@
   </div>
 </section>
 
-<app-footer></app-footer>
+<!-- <app-footer></app-footer> -->

@@ -1,4 +1,4 @@
-<app-page-header></app-page-header>
+<!-- <app-page-header></app-page-header> -->
 <section class="departments-section">
   <div class="container-fluid">
     <!-- 🔥 Page Header -->
@@ -6,8 +6,13 @@
       <div class="header-decoration">
         <div class="pyramid-icon">
           <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <path d="M50 10 L90 90 L10 90 Z" fill="currentColor"/>
-            <path d="M50 20 L80 80 L20 80 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+            <path d="M50 10 L90 90 L10 90 Z" fill="currentColor" />
+            <path
+              d="M50 20 L80 80 L20 80 Z"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
           </svg>
         </div>
       </div>
@@ -15,9 +20,30 @@
       <div class="header-decoration right">
         <div class="ankh-symbol">
           <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="25" r="15" fill="none" stroke="currentColor" stroke-width="3"/>
-            <line x1="50" y1="40" x2="50" y2="90" stroke="currentColor" stroke-width="3"/>
-            <line x1="30" y1="55" x2="70" y2="55" stroke="currentColor" stroke-width="3"/>
+            <circle
+              cx="50"
+              cy="25"
+              r="15"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3"
+            />
+            <line
+              x1="50"
+              y1="40"
+              x2="50"
+              y2="90"
+              stroke="currentColor"
+              stroke-width="3"
+            />
+            <line
+              x1="30"
+              y1="55"
+              x2="70"
+              y2="55"
+              stroke="currentColor"
+              stroke-width="3"
+            />
           </svg>
         </div>
       </div>
@@ -45,7 +71,10 @@
 
       <!-- 📊 Main Content -->
       <main class="departments-main">
-        <div *ngIf="selectedDepartment; else noSelection" class="department-details">
+        <div
+          *ngIf="selectedDepartment; else noSelection"
+          class="department-details"
+        >
           <article class="department-card">
             <div class="card-header">
               <div class="card-icon-wrapper">
@@ -56,17 +85,24 @@
 
             <div class="card-body">
               <h2 class="card-title">{{ selectedDepartment.name }}</h2>
-              
+
               <div class="detail-grid">
                 <div class="detail-item">
                   <h3 class="section-title2">المدير</h3>
-                  <p class="section-content">{{ selectedDepartment.director }}</p>
+                  <p class="section-content">
+                    {{ selectedDepartment.director }}
+                  </p>
                 </div>
 
                 <div class="detail-item">
                   <h3 class="section-title2">أعضاء الفريق</h3>
                   <ul class="team-list">
-                    <li *ngFor="let member of selectedDepartment.team" class="section-content">{{ member }}</li>
+                    <li
+                      *ngFor="let member of selectedDepartment.team"
+                      class="section-content"
+                    >
+                      {{ member }}
+                    </li>
                   </ul>
                 </div>
 
@@ -77,20 +113,38 @@
 
                 <div class="detail-item">
                   <h3 class="section-title2">الرسالة</h3>
-                  <p class="section-content">{{ selectedDepartment.mission }}</p>
+                  <p class="section-content">
+                    {{ selectedDepartment.mission }}
+                  </p>
                 </div>
 
                 <div class="detail-item">
                   <h3 class="section-title2">المسؤوليات الرئيسية</h3>
                   <ul class="responsibilities-list">
-                    <li *ngFor="let resp of selectedDepartment.responsibilities" class="section-content">{{ resp }}</li>
+                    <li
+                      *ngFor="let resp of selectedDepartment.responsibilities"
+                      class="section-content"
+                    >
+                      {{ resp }}
+                    </li>
                   </ul>
                 </div>
 
-                <div *ngIf="selectedDepartment.subDepartments && selectedDepartment.subDepartments.length > 0" class="detail-item">
+                <div
+                  *ngIf="
+                    selectedDepartment.subDepartments &&
+                    selectedDepartment.subDepartments.length > 0
+                  "
+                  class="detail-item"
+                >
                   <h3 class="section-title2">الأقسام الفرعية</h3>
                   <ul class="sub-dept-list">
-                    <li *ngFor="let sub of selectedDepartment.subDepartments" class="section-content">{{ sub }}</li>
+                    <li
+                      *ngFor="let sub of selectedDepartment.subDepartments"
+                      class="section-content"
+                    >
+                      {{ sub }}
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -98,7 +152,11 @@
 
             <div class="card-decoration">
               <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 100 L50 50 L100 100 Z" fill="currentColor" opacity="0.05"/>
+                <path
+                  d="M0 100 L50 50 L100 100 Z"
+                  fill="currentColor"
+                  opacity="0.05"
+                />
               </svg>
             </div>
           </article>
@@ -108,7 +166,9 @@
           <div class="no-selection">
             <i class="pi pi-info-circle"></i>
             <h3 class="section-title">اختر قسماً</h3>
-            <p class="section-content">اختر قسماً من الشريط الجانبي لرؤية التفاصيل</p>
+            <p class="section-content">
+              اختر قسماً من الشريط الجانبي لرؤية التفاصيل
+            </p>
           </div>
         </ng-template>
       </main>
@@ -117,7 +177,11 @@
 </section>
 
 <!-- Mobile Drawer (replaces p-sidebar) -->
-<p-drawer [(visible)]="isMobileSidebarVisible" position="left" styleClass="mobile-sidebar">
+<p-drawer
+  [(visible)]="isMobileSidebarVisible"
+  position="left"
+  styleClass="mobile-sidebar"
+>
   <div class="sidebar-header">
     <i class="pi pi-sitemap"></i>
     <h3>التنقل السريع</h3>
@@ -135,4 +199,4 @@
   </nav>
 </p-drawer>
 
-<app-footer></app-footer>
+<!-- <app-footer></app-footer> -->

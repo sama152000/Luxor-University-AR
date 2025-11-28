@@ -1,14 +1,13 @@
-<app-page-header></app-page-header>
+<!-- <app-page-header></app-page-header> -->
 <section class="center-details-section">
   <div class="container-fluid py-5">
-    
     <div class="center-details" *ngIf="center">
       <div class="row">
         <div class="col-12">
           <div class="card mb-4">
             <div class="card-body">
-              <h2 class="section-title2">عن {{center.name}}</h2>
-              <p class="section-content">{{center.description}}</p>
+              <h2 class="section-title2">عن {{ center.pageName }}</h2>
+              <p class="section-content">{{ center.description }}</p>
             </div>
           </div>
 
@@ -18,7 +17,7 @@
               <h2 class="section-title2">الخدمات والأنشطة</h2>
               <ul class="services-list">
                 <li *ngFor="let service of getServices(center.id)">
-                  {{service}}
+                  {{ service }}
                 </li>
               </ul>
             </div>
@@ -26,26 +25,29 @@
 
           <!-- Navigation -->
           <div class="navigation-bar d-flex justify-content-between">
-            <p-button 
+            <p-button
               *ngIf="getPreviousCenterId()"
               [routerLink]="['/centers', getPreviousCenterId()]"
               label="المركز السابق"
               icon="pi pi-arrow-left"
-              styleClass="p-button-outlined p-button-secondary">
+              styleClass="p-button-outlined p-button-secondary"
+            >
             </p-button>
             <p-button
               routerLink="/Center-list"
               label="العودة إلى جميع المراكز"
               icon="pi pi-list"
-              styleClass="p-button-primary">
+              styleClass="p-button-primary"
+            >
             </p-button>
-            <p-button 
+            <p-button
               *ngIf="getNextCenterId()"
               [routerLink]="['/centers', getNextCenterId()]"
               label="المركز التالي"
               icon="pi pi-arrow-right"
               iconPos="right"
-              styleClass="p-button-outlined p-button-secondary">
+              styleClass="p-button-outlined p-button-secondary"
+            >
             </p-button>
           </div>
         </div>
@@ -54,4 +56,4 @@
   </div>
 </section>
 
-<app-footer></app-footer>
+<!-- <app-footer></app-footer> -->
