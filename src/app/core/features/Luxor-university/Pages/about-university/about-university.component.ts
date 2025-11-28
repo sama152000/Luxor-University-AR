@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PagesService } from '../../Services/real services/pages.service';
+import { PageHeaderComponent } from '../shared/page-header/page-header.component';
 
 interface Tab {
   id: string;
@@ -12,7 +13,7 @@ interface Tab {
 @Component({
   selector: 'app-about-university',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, PageHeaderComponent],
   templateUrl: './about-university.component.html',
   styleUrls: ['./about-university.component.css'],
 })
