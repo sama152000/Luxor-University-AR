@@ -1,4 +1,12 @@
 <nav class="navbar-wrapper">
+  <div class="contact-top-bar" *ngIf="contactInfo">
+    <div class="container-fluid">
+      <div class="d-flex justify-content-center align-items-center">
+        <span class="contact-item"><i class="pi pi-phone"></i> {{contactInfo.phone}}</span>
+        <span class="contact-item"><i class="pi pi-envelope"></i> {{contactInfo.email}}</span>
+      </div>
+    </div>
+  </div>
   <div class="top-navbar">
     <div class="container-fluid">
       <div class="d-flex justify-content-between align-items-center h-100">
@@ -7,8 +15,7 @@
         <div class="logo-container mobile-logo">
           <img src="./assets/Logo.png" alt="Luxor University Logo" class="university-logo">
         </div>
-        <a href="        https://luxor-university-en-oubw.vercel.app
-" class="language-link">
+        <a href="https://luxor-university-en-oubw.vercel.app" class="language-link">
           <i class="pi pi-globe"></i>
           <span>English</span>
         </a>

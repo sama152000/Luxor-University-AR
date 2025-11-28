@@ -207,10 +207,12 @@
   content: '◆';
   position: absolute;
   right: 0;
+  top: 0;
   color: var(--accent-color);
   font-weight: bold;
   font-size: 1.3rem;
   text-shadow: 0 0 10px rgba(228, 144, 23, 0.5);
+
 }
 
 .features-list li:hover {
