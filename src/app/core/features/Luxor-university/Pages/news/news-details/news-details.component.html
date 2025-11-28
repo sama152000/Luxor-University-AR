@@ -1,4 +1,4 @@
-<app-page-header></app-page-header>
+<!-- <app-page-header></app-page-header> -->
 <div class="news-details-container" *ngIf="!loading && currentNews">
   <!-- Page Header -->
 
@@ -10,7 +10,9 @@
           <!-- Article Header -->
           <header class="article-header">
             <div class="article-badges">
-              <span class="category-badge">{{ getNewsCategory(currentNews) }}</span>
+              <span class="category-badge">{{
+                getNewsCategory(currentNews)
+              }}</span>
               <span *ngIf="currentNews.isBreaking" class="breaking-badge">
                 <i class="pi pi-bolt"></i>
                 عاجل
@@ -30,8 +32,12 @@
                     <i class="pi pi-user"></i>
                   </div>
                   <div class="author-details">
-                    <span class="author-name">{{ getNewsAuthor(currentNews) }}</span>
-                    <span class="publish-date">{{ formatDate(currentNews.date) }}</span>
+                    <span class="author-name">{{
+                      getNewsAuthor(currentNews)
+                    }}</span>
+                    <span class="publish-date">{{
+                      formatDate(currentNews.date)
+                    }}</span>
                   </div>
                 </div>
               </div>
@@ -46,19 +52,39 @@
 
                 <div class="share-buttons">
                   <span class="share-label">مشاركة:</span>
-                  <button class="share-btn facebook" (click)="shareOnFacebook()" title="مشاركة على فيسبوك">
+                  <button
+                    class="share-btn facebook"
+                    (click)="shareOnFacebook()"
+                    title="مشاركة على فيسبوك"
+                  >
                     <i class="pi pi-facebook"></i>
                   </button>
-                  <button class="share-btn twitter" (click)="shareOnTwitter()" title="مشاركة على تويتر">
+                  <button
+                    class="share-btn twitter"
+                    (click)="shareOnTwitter()"
+                    title="مشاركة على تويتر"
+                  >
                     <i class="pi pi-twitter"></i>
                   </button>
-                  <button class="share-btn linkedin" (click)="shareOnLinkedIn()" title="مشاركة على لينكدإن">
+                  <button
+                    class="share-btn linkedin"
+                    (click)="shareOnLinkedIn()"
+                    title="مشاركة على لينكدإن"
+                  >
                     <i class="pi pi-linkedin"></i>
                   </button>
-                  <button class="share-btn copy" (click)="copyLink()" title="نسخ الرابط">
+                  <button
+                    class="share-btn copy"
+                    (click)="copyLink()"
+                    title="نسخ الرابط"
+                  >
                     <i class="pi pi-copy"></i>
                   </button>
-                  <button class="share-btn print" (click)="printArticle()" title="طباعة المقال">
+                  <button
+                    class="share-btn print"
+                    (click)="printArticle()"
+                    title="طباعة المقال"
+                  >
                     <i class="pi pi-print"></i>
                   </button>
                 </div>
@@ -67,41 +93,58 @@
           </header>
 
           <!-- Image Slider -->
-          <div class="image-slider-container" *ngIf="currentNews.images.length > 0">
+          <div
+            class="image-slider-container"
+            *ngIf="currentNews.images.length > 0"
+          >
             <div class="image-slider">
               <div class="slider-main-image">
-                <img [src]="currentNews.images[currentImageIndex]"
-                     [alt]="getNewsTitle(currentNews)"
-                     class="main-image">
+                <img
+                  [src]="currentNews.images[currentImageIndex]"
+                  [alt]="getNewsTitle(currentNews)"
+                  class="main-image"
+                />
 
                 <!-- Navigation Arrows -->
-                <button class="slider-nav prev"
-                        (click)="previousImage()"
-                        *ngIf="currentNews.images.length > 1"
-                        [disabled]="currentNews.images.length <= 1">
+                <button
+                  class="slider-nav prev"
+                  (click)="previousImage()"
+                  *ngIf="currentNews.images.length > 1"
+                  [disabled]="currentNews.images.length <= 1"
+                >
                   <i class="pi pi-chevron-left"></i>
                 </button>
 
-                <button class="slider-nav next"
-                        (click)="nextImage()"
-                        *ngIf="currentNews.images.length > 1"
-                        [disabled]="currentNews.images.length <= 1">
+                <button
+                  class="slider-nav next"
+                  (click)="nextImage()"
+                  *ngIf="currentNews.images.length > 1"
+                  [disabled]="currentNews.images.length <= 1"
+                >
                   <i class="pi pi-chevron-right"></i>
                 </button>
 
                 <!-- Image Counter -->
-                <div class="image-counter" *ngIf="currentNews.images.length > 1">
+                <div
+                  class="image-counter"
+                  *ngIf="currentNews.images.length > 1"
+                >
                   {{ currentImageIndex + 1 }} / {{ currentNews.images.length }}
                 </div>
               </div>
 
               <!-- Thumbnail Navigation -->
-              <div class="slider-thumbnails" *ngIf="currentNews.images.length > 1">
-                <button class="thumbnail"
-                        *ngFor="let image of currentNews.images; let i = index"
-                        [class.active]="i === currentImageIndex"
-                        (click)="goToImage(i)">
-                  <img [src]="image" [alt]="'صورة ' + (i + 1)">
+              <div
+                class="slider-thumbnails"
+                *ngIf="currentNews.images.length > 1"
+              >
+                <button
+                  class="thumbnail"
+                  *ngFor="let image of currentNews.images; let i = index"
+                  [class.active]="i === currentImageIndex"
+                  (click)="goToImage(i)"
+                >
+                  <img [src]="image" [alt]="'صورة ' + (i + 1)" />
                 </button>
               </div>
             </div>
@@ -109,7 +152,10 @@
 
           <!-- Article Content -->
           <div class="article-content">
-            <div class="content-text" [innerHTML]="getNewsContent(currentNews)"></div>
+            <div
+              class="content-text"
+              [innerHTML]="getNewsContent(currentNews)"
+            ></div>
 
             <!-- Tags -->
             <div class="article-tags" *ngIf="currentNews.tags.length > 0">
@@ -126,17 +172,21 @@
           </div>
 
           <!-- Floating Navigation Buttons -->
-          <button class="floating-nav-btn prev-floating-btn"
-                  (click)="navigateToPrevious()"
-                  *ngIf="previousNews"
-                  [title]="getNewsTitle(previousNews)">
+          <button
+            class="floating-nav-btn prev-floating-btn"
+            (click)="navigateToPrevious()"
+            *ngIf="previousNews"
+            [title]="getNewsTitle(previousNews)"
+          >
             <i class="pi pi-arrow-left"></i>
           </button>
 
-          <button class="floating-nav-btn next-floating-btn"
-                  (click)="navigateToNext()"
-                  *ngIf="nextNews"
-                  [title]="getNewsTitle(nextNews)">
+          <button
+            class="floating-nav-btn next-floating-btn"
+            (click)="navigateToNext()"
+            *ngIf="nextNews"
+            [title]="getNewsTitle(nextNews)"
+          >
             <i class="pi pi-arrow-right"></i>
           </button>
         </article>
@@ -153,16 +203,20 @@
           </h3>
 
           <div class="most-read-grid">
-            <article class="most-read-card"
-                     *ngFor="let news of mostReadNews; let i = index"
-                     (click)="navigateToNews(news.id)">
+            <article
+              class="most-read-card"
+              *ngFor="let news of mostReadNews; let i = index"
+              (click)="navigateToNews(news.id)"
+            >
               <div class="most-read-image">
-                <img [src]="news.imageUrl" [alt]="getNewsTitle(news)">
+                <img [src]="news.imageUrl" [alt]="getNewsTitle(news)" />
               </div>
               <div class="most-read-details">
                 <h4 class="most-read-title">{{ getNewsTitle(news) }}</h4>
                 <div class="most-read-meta">
-                  <span class="most-read-date">{{ formatDate(news.date) }}</span>
+                  <span class="most-read-date">{{
+                    formatDate(news.date)
+                  }}</span>
                   <span class="most-read-views">
                     <i class="pi pi-eye"></i>
                     {{ news.views }}
@@ -178,7 +232,10 @@
     <!-- Back to News Button -->
     <div class="row">
       <div class="col-12 text-center">
-        <a [routerLink]="['/all-news']" class="btn btn-outline-primary-custom back-btn">
+        <a
+          [routerLink]="['/all-news']"
+          class="btn btn-outline-primary-custom back-btn"
+        >
           <i class="pi pi-arrow-right"></i>
           العودة للأخبار
         </a>
@@ -201,4 +258,4 @@
   </div>
 </div>
 
-<app-footer></app-footer>
+<!-- <app-footer></app-footer> -->

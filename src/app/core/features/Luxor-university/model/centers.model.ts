@@ -1,5 +1,9 @@
 export interface Center {
   id: string;
-  name: string;
-  description: string;
+  pageName: string;
+  description?: string;
+  mission?: string;
+  place?: string;
+  subTitle?: string;
+  vision?: string;
 }

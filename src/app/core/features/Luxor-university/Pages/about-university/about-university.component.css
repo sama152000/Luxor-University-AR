@@ -5,7 +5,6 @@
   padding: var(--section-padding);
   background: var(--bg-light);
   overflow: hidden;
-
 }
 
 /* Subtle Background Pattern */
@@ -20,15 +19,22 @@
 }
 
 .pharaonic-background::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-image:
-    radial-gradient(circle at 25% 75%, rgba(228, 144, 23, 0.02) 0%, transparent 50%),
-    radial-gradient(circle at 75% 25%, rgba(39, 48, 117, 0.02) 0%, transparent 50%);
+  background-image: radial-gradient(
+      circle at 25% 75%,
+      rgba(228, 144, 23, 0.02) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 75% 25%,
+      rgba(39, 48, 117, 0.02) 0%,
+      transparent 50%
+    );
 }
 
 .pharaonic-overlay {
@@ -75,13 +81,17 @@
 }
 
 .vertical-tabs::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 4px;
-  background: linear-gradient(90deg, var(--accent-color), var(--dark-accent-color));
+  background: linear-gradient(
+    90deg,
+    var(--accent-color),
+    var(--dark-accent-color)
+  );
 }
 
 .tab-item {
@@ -98,7 +108,7 @@
 }
 
 .tab-item::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 50%;
@@ -121,8 +131,12 @@
 }
 
 .tab-item.active {
-  background: linear-gradient(135deg, var(--accent-color), var(--dark-accent-color));
-  color: white;
+  background: linear-gradient(
+    135deg,
+    var(--accent-color),
+    var(--dark-accent-color)
+  );
+  color: rgb(0, 0, 0);
   box-shadow: 0 8px 25px rgba(228, 144, 23, 0.3);
   transform: translateX(0);
 }
@@ -242,7 +256,7 @@
 
 .pharaonic-divider::before,
 .pharaonic-divider::after {
-  content: '';
+  content: "";
   width: 60px;
   height: 3px;
   background: linear-gradient(90deg, transparent, var(--accent-color));
@@ -313,11 +327,21 @@
   animation: slideInLeft 0.5s ease-out backwards;
 }
 
-.goal-item:nth-child(1) { animation-delay: 0.1s; }
-.goal-item:nth-child(2) { animation-delay: 0.2s; }
-.goal-item:nth-child(3) { animation-delay: 0.3s; }
-.goal-item:nth-child(4) { animation-delay: 0.4s; }
-.goal-item:nth-child(5) { animation-delay: 0.5s; }
+.goal-item:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.goal-item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.goal-item:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.goal-item:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.goal-item:nth-child(5) {
+  animation-delay: 0.5s;
+}
 
 @keyframes slideInLeft {
   from {
@@ -339,7 +363,11 @@
 .goal-number {
   width: 44px;
   height: 44px;
-  background: linear-gradient(135deg, var(--accent-color), var(--dark-accent-color));
+  background: linear-gradient(
+    135deg,
+    var(--accent-color),
+    var(--dark-accent-color)
+  );
   color: white;
   border-radius: 50%;
   display: flex;

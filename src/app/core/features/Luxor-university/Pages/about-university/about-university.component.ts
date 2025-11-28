@@ -1,11 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PageHeaderComponent } from '../shared/page-header/page-header.component';
-import { FooterComponent } from '../shared/footer/footer.component';
-import { NavbarComponent } from '../shared/navbar/navbar.component';
-import { PagesService } from '../../Services/pages.service';
-import { AboutUniversityService } from '../../Services/about-university.service';
-import { PageRequest } from '../../model/page-request.model';
+import { PagesService } from '../../Services/real services/pages.service';
 
 interface Tab {
   id: string;
@@ -17,12 +12,7 @@ interface Tab {
 @Component({
   selector: 'app-about-university',
   standalone: true,
-  imports: [
-    CommonModule,
-    PageHeaderComponent,
-    FooterComponent,
-    NavbarComponent,
-  ],
+  imports: [CommonModule],
   templateUrl: './about-university.component.html',
   styleUrls: ['./about-university.component.css'],
 })
@@ -39,10 +29,8 @@ export class AboutUniversityComponent implements OnInit {
   // Services
   pagesService = inject(PagesService);
 
-  constructor(private aboutUniversityService: AboutUniversityService) {}
-
   ngOnInit(): void {
-    this.loadGoals();
+    // this.loadGoals();
     this.loadAboutData();
 
     // Smooth fade-in animation
@@ -53,18 +41,21 @@ export class AboutUniversityComponent implements OnInit {
   // 1️⃣ جلب البيانات من الـ API
   // ---------------------------------------------------------------------
   loadAboutData(): void {
-    const request: PageRequest = {
-      pageNumber: 1,
-      pageSize: 10,
-      filter: { name: '', isDeleted: false },
-      orderByValue: [{ colId: 'id', sort: 'asc' }],
-    };
+    // const request: PageRequest = {
+    //   pageNumber: 1,
+    //   pageSize: 10,
+    //   filter: { name: '', isDeleted: false },
+    //   orderByValue: [{ colId: 'id', sort: 'asc' }],
+    // };
 
-    this.pagesService.getPaged(request).subscribe({
+    this.pagesService.pages.subscribe({
       next: (res) => {
+        console.log(this.aboutData);
+
         this.aboutData = res.data.find(
           (item: any) => item.pageName === 'عن الجامعة'
         );
+        console.log(this.aboutData);
 
         this.buildTabs();
       },
@@ -75,9 +66,9 @@ export class AboutUniversityComponent implements OnInit {
   // ---------------------------------------------------------------------
   // 2️⃣ تحميل الأهداف من الخدمة المحلية
   // ---------------------------------------------------------------------
-  loadGoals(): void {
-    this.goalsList = this.aboutUniversityService.getAboutUniversity().goals;
-  }
+  // loadGoals(): void {
+  //   this.goalsList = this.aboutUniversityService.getAboutUniversity().goals;
+  // }
 
   // ---------------------------------------------------------------------
   // 3️⃣ بناء Tabs بعد وصول جميع البيانات
@@ -108,7 +99,7 @@ export class AboutUniversityComponent implements OnInit {
         id: 'goals',
         title: 'أهدافنا',
         icon: 'pi pi-bullseye',
-        content: this.goalsList,
+        content: this.aboutData.goals,
       },
     ];
   }

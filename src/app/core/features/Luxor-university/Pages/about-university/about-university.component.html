@@ -1,60 +1,62 @@
-<app-navbar></app-navbar>
-<app-page-header></app-page-header>
-
 <section class="about-university-section">
-  <div class="pharaonic-background"></div>
-  <div class="pharaonic-overlay"></div>
+  <header class="hero-header">
+    <div class="pharaonic-background"></div>
+    <div class="pharaonic-overlay"></div>
+  </header>
 
-  <div class="container-fluid">
-    <div class="about-university-container" [class.visible]="isVisible">
-      <!-- 🌟 Sidebar Tabs -->
-      <div class="vertical-tabs">
-        <div
+  <main
+    class="container-fluid about-university-container"
+    [class.visible]="isVisible"
+  >
+    <!-- 🌟 Sidebar Tabs -->
+    <aside class="vertical-tabs" role="navigation" aria-label="About sections">
+      <ul>
+        @for(tab of tabs; track tab.id) {
+        <li
           class="tab-item"
-          *ngFor="let tab of tabs"
           [class.active]="activeTab === tab.id"
           (click)="setActiveTab(tab.id)"
+          role="button"
+          tabindex="0"
         >
-          <div class="tab-icon"><i [class]="tab.icon"></i></div>
-          <div class="tab-title">{{ tab.title }}</div>
-          <div class="tab-indicator"></div>
-        </div>
-      </div>
+          <i class="tab-icon" [class]="tab.icon"></i>
+          <span class="tab-title">{{ tab.title }}</span>
+          <span class="tab-indicator"></span>
+        </li>
+        }
+      </ul>
+    </aside>
 
-      <!-- 🌟 Content Section -->
-      <div class="content-area">
-        <div class="content-header">
-          <h1 class="content-title">{{ activeTabTitle }}</h1>
+    <!-- 🌟 Content Section -->
+    <article class="content-area">
+      <header class="content-header">
+        <h1 class="content-title">{{ activeTabTitle }}</h1>
 
-          <div class="pharaonic-divider">
-            <div class="pyramid-icon">
-              <svg viewBox="0 0 24 24">
-                <path d="M12 2L2 22h20L12 2z" fill="currentColor" />
-              </svg>
-            </div>
-          </div>
-        </div>
+        <figure class="pharaonic-divider">
+          <svg class="pyramid-icon" viewBox="0 0 24 24">
+            <path d="M12 2L2 22h20L12 2z" />
+          </svg>
+        </figure>
+      </header>
 
-        <div class="content-body">
-          <!-- ✨ Content Text -->
-          <div class="description" *ngIf="activeTab !== 'goals'">
-            <p>{{ activeTabContent }}</p>
-          </div>
+      <section class="content-body">
+        <!-- ✨ Content Text -->
+        @if(activeTab !== 'goals') {
+        <p class="description">{{ activeTabContent }}</p>
+        }
 
-          <!-- ✨ Goals List -->
-          <div class="goals-section" *ngIf="activeTab === 'goals'">
-            <div
-              class="goal-item"
-              *ngFor="let goal of goalsList; let i = index"
-            >
-              <div class="goal-number">{{ i + 1 }}</div>
-              <p class="goal-text">{{ goal }}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+        <!-- ✨ Goals List -->
+        @if(activeTab === 'goals') {
+        <ul class="goals-section">
+          @for(goal of aboutData.goals; track goal.index) {
+          <li class="goal-item">
+            <strong class="goal-number">{{ goal.index }}</strong>
+            <p class="goal-text">{{ goal.goalName }}</p>
+          </li>
+          }
+        </ul>
+        }
+      </section>
+    </article>
+  </main>
 </section>
-
-<app-footer></app-footer>
