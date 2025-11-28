@@ -26,7 +26,7 @@ export class FooterService {
     ],
     contactInfo: {
       address: 'مدينة الأقصر - طريق الكباش - جمهورية مصر العربية',
-      phone: '+20 95 000 0000',
+      phone: '20 95 000 000',
       email: 'info@luxoruniv.edu.eg'
     },
     socialLinks: [
