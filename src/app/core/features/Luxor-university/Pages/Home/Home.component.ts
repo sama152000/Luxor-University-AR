@@ -11,14 +11,12 @@ import { EventsConferencesComponent } from './events-conferences/events-conferen
 import { StatisticsComponent } from './statistics/statistics.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { FooterComponent } from '../shared/footer/footer.component';
-import { PageHeaderComponent } from '../shared/page-header/page-header.component';
 
 @Component({
   selector: 'app-Home',
   templateUrl: './Home.component.html',
   styleUrls: ['./Home.component.css'],
   imports: [
-    PageHeaderComponent,
     NavbarComponent,
     HeroComponent,
     ServicesCardsComponent,
