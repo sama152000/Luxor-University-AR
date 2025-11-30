@@ -1,13 +1,13 @@
-<!-- <app-page-header></app-page-header> -->
+<app-page-header></app-page-header>
 <section class="center-details-section">
   <div class="container-fluid py-5">
-    <div class="center-details" *ngIf="center">
+    <div class="center-details visible">
       <div class="row">
         <div class="col-12">
           <div class="card mb-4">
             <div class="card-body">
-              <h2 class="section-title2">عن {{ center.pageName }}</h2>
-              <p class="section-content">{{ center.description }}</p>
+              <h2 class="section-title2">عن {{ center?.centerName }}</h2>
+              <p class="section-content">{{ center?.about }}</p>
             </div>
           </div>
 
@@ -16,8 +16,8 @@
             <div class="card-body">
               <h2 class="section-title2">الخدمات والأنشطة</h2>
               <ul class="services-list">
-                <li *ngFor="let service of getServices(center.id)">
-                  {{ service }}
+                <li *ngFor="let goal of center?.goals">
+                  {{ goal?.goalName }}
                 </li>
               </ul>
             </div>
@@ -34,7 +34,7 @@
             >
             </p-button>
             <p-button
-              routerLink="/Center-list"
+              [routerLink]="'/center-list'"
               label="العودة إلى جميع المراكز"
               icon="pi pi-list"
               styleClass="p-button-primary"
@@ -55,5 +55,3 @@
     </div>
   </div>
 </section>
-
-<!-- <app-footer></app-footer> -->

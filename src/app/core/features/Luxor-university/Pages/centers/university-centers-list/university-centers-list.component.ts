@@ -46,7 +46,7 @@ export class UniversityCentersListComponent implements OnInit {
   onSearch() {
     const query = this.searchQuery.toLowerCase().trim();
     this.filteredCenters = this.centersList.filter((center) =>
-      center.pageName.toLowerCase().includes(query)
+      center.centerName.toLowerCase().includes(query)
     );
   }
 
@@ -58,14 +58,14 @@ export class UniversityCentersListComponent implements OnInit {
     }
   }
 
-loadCenterList(): void {
-  this.centerService.centers.subscribe({
-    next: (res) => {
-      this.centersList = res.data;
-      this.filteredCenters = [...this.centersList];  // ✔ مهم جدًا
-      console.log(this.centersList);
-    },
-    error: (err) => console.error('API Error:', err),
-  });
-}
+  loadCenterList(): void {
+    this.centerService.centers.subscribe({
+      next: (res) => {
+        this.centersList = res.data;
+        this.filteredCenters = res.data; // ✔ مهم جدًا
+        console.log(this.centersList);
+      },
+      error: (err) => console.error('API Error:', err),
+    });
+  }
 }

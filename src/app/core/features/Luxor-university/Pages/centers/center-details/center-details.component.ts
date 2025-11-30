@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, ActivatedRoute } from '@angular/router';
-import { CentersService } from '../../../Services/centers.service';
+// import { CentersService } from '../../../Services/centers.service';
 import { Center } from '../../../model/centers.model';
 import { ButtonModule } from 'primeng/button';
 import { PageHeaderComponent } from '../../shared/page-header/page-header.component';
 import { FooterComponent } from '../../shared/footer/footer.component';
+import { CentersService } from '../../../Services/real services/centers.service';
 
 @Component({
   selector: 'app-center-details',
@@ -37,22 +38,37 @@ export class CenterDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.centers = this.centersService.getCenters();
+    this.centersService.centers.subscribe({
+      next: (res) => {
+        this.centers = res.data;
+      },
+      error: (err) => console.error('API Error:', err),
+    });
+
+    setTimeout(() => {
+      document
+        .querySelectorAll('.center-card, .sidebar-item')
+        .forEach((el, i) => {
+          setTimeout(() => el.classList.add('visible'), i * 100);
+        });
+    }, 200);
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id');
       if (id) {
-        this.center = this.centersService.getCenterById(id);
-        this.currentIndex = this.centers.findIndex((c) => c.id === id);
-        if (this.center) {
-          this.breadcrumbs[2].label = this.center.pageName;
-        }
+        this.centersService.getById(id).subscribe({
+          next: (res) => {
+            this.center = res.data;
+            console.log(this.center, 'his.center');
+
+            this.currentIndex = this.centers.findIndex((c) => c.id === id);
+            if (this.center) {
+              this.breadcrumbs[2].label = this.center.centerName;
+            }
+          },
+          error: (err) => console.error('API Error:', err),
+        });
       }
     });
-    setTimeout(() => {
-      document
-        .querySelectorAll('.center-details')
-        .forEach((el) => el.classList.add('visible'));
-    }, 200);
   }
 
   getPreviousCenterId(): string | null {
@@ -65,67 +81,5 @@ export class CenterDetailsComponent implements OnInit {
     return this.currentIndex < this.centers.length - 1
       ? this.centers[this.currentIndex + 1].id
       : null;
-  }
-
-  getServices(centerId: string): string[] {
-    const servicesMap: { [key: string]: string[] } = {
-      'fine-arts': [
-        'الديكور',
-        'التصوير',
-        'التصميم الجرافيكي',
-        'الموضة',
-        'الإعلام',
-        'برامج الكمبيوتر',
-        'النحت',
-      ],
-      'design-media': [
-        'خدمات التصميم',
-        'دورات احترافية',
-        'تدريب عملي',
-        'الإعلام الرقمي',
-      ],
-      'cultural-heritage': [
-        'دورات تدريبية',
-        'استشارات علمية',
-        'بحوث حول التراث',
-      ],
-      'tourism-hospitality': [
-        'التوعية السياحية',
-        'تدريب في السياحة',
-        'تدريب في الضيافة',
-        'بحوث متخصصة',
-      ],
-      'it-consulting': [
-        'تكامل البرمجيات',
-        'تدريب تقنية المعلومات',
-        'استشارات فنية',
-        'تطوير قواعد البيانات',
-      ],
-      carpentry: [
-        'توريد الأثاث',
-        'المنتجات الخشبية',
-        'استشارات تصميمات النجارة',
-      ],
-      'digital-printing': [
-        'خدمات الطباعة',
-        'خدمات النشر',
-        'تدريب',
-        'بحوث في الطباعة',
-      ],
-      laundry: ['خدمات غسيل الملابس للطلاب'],
-      'psych-support': ['الدعم النفسي', 'الدعم التربوي'],
-      'project-management': ['خدمات إدارة المشروعات'],
-      'career-development': [
-        'التوعية المهنية',
-        'تدريب الميسرين',
-        'تدريب مهارات التوظيف',
-      ],
-      'measurement-evaluation': ['خطط التقييم', 'تدريب', 'بحوث لتحسين الأداء'],
-      ict: ['خدمات تكنولوجيا المعلومات والاتصالات', 'تدريب', 'استشارات'],
-      'al-alsun': ['تدريب لغوي', 'تدقيق لغوي', 'ترجمة', 'استشارات لغوية'],
-      handicrafts: ['دعم الحرف التقليدية', 'تدريب', 'بحوث للمشروعات الصغيرة'],
-      'bronze-foundry': ['خدمات سباكة البرونز', 'استشارات', 'تدريب'],
-    };
-    return servicesMap[centerId] || [];
   }
 }

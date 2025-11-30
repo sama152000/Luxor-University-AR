@@ -12,19 +12,15 @@
           <h2 class="section-title2 mb-4">مراكز الجامعة</h2>
 
           @for (center of centersList; track center.id) {
-          <div class="sidebar-item">
+          <div
+            class="sidebar-item"
+            [class.active]="selectedCenterId === center.id"
+            (click)="selectCenter(center.id)"
+          >
             <i class="pi pi-building me-2"></i>
-            {{ center.pageName }}
+            {{ center.centerName }}
           </div>
           }
-          <!-- <div
-            class="sidebar-item"
-            *ngFor="let center of centersList"
-            [class.active]="selectedCenterId === center.id"
-            (click)="selectCenter(center.id)">
-            <i class="pi pi-building me-2"></i>
-            {{ center.pageName }}
-          </div> -->
         </div>
       </div>
 
@@ -53,7 +49,7 @@
           >
             <p-card class="center-card" [attr.id]="center.id">
               <div class="card-body">
-                <h3 class="card-title">{{ center.pageName }}</h3>
+                <h3 class="card-title">{{ center.centerName }}</h3>
                 <p class="card-text">{{ center.about }}</p>
                 <a
                   routerLink="/centers/{{ center.id }}"
