@@ -1,12 +1,15 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { CardModule } from 'primeng/card';
+import { ListboxModule } from 'primeng/listbox';
 import { CentersService } from '../../../Services/real services/centers.service';
 import { Center } from '../../../model/centers.model';
-import { ButtonModule } from 'primeng/button';
-import { CardModule } from 'primeng/card';
 import { PageHeaderComponent } from '../../shared/page-header/page-header.component';
+import { InputIcon } from 'primeng/inputicon';
+import { IconField } from 'primeng/iconfield';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-university-centers-list',
@@ -16,8 +19,11 @@ import { PageHeaderComponent } from '../../shared/page-header/page-header.compon
     CommonModule,
     FormsModule,
     RouterModule,
-    ButtonModule,
     CardModule,
+    ListboxModule,
+    InputTextModule,
+    IconField,
+    InputIcon,
   ],
   templateUrl: './university-centers-list.component.html',
   styleUrls: ['./university-centers-list.component.css'],
@@ -25,47 +31,68 @@ import { PageHeaderComponent } from '../../shared/page-header/page-header.compon
 export class UniversityCentersListComponent implements OnInit {
   centersList: Center[] = [];
   filteredCenters: Center[] = [];
-  searchQuery = '';
-  selectedCenterId: string | null = null;
+  sidebarItems: Center[] = [];
+  selectedCenterId: any;
+  /** قيمة البحث */
+  searchQuery: string = '';
+
+  selectedCenter: Center | null = null;
 
   centerService = inject(CentersService);
 
   ngOnInit() {
-    this.filteredCenters = this.centersList;
-    setTimeout(() => {
-      document
-        .querySelectorAll('.center-card, .sidebar-item')
-        .forEach((el, i) => {
-          setTimeout(() => el.classList.add('visible'), i * 100);
-        });
-    }, 200);
-
-    this.loadCenterList();
+    this.loadCenters();
   }
 
-  onSearch() {
-    const query = this.searchQuery.toLowerCase().trim();
-    this.filteredCenters = this.centersList.filter((center) =>
-      center.centerName.toLowerCase().includes(query)
-    );
-  }
-
-  selectCenter(id: string) {
-    this.selectedCenterId = id;
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  }
-
-  loadCenterList(): void {
+  loadCenters() {
     this.centerService.centers.subscribe({
       next: (res) => {
+        // Full list without "كل المراكز"
         this.centersList = res.data;
-        this.filteredCenters = res.data; // ✔ مهم جدًا
-        console.log(this.centersList);
+
+        // Sidebar: أضف عنصر "كل المراكز" فقط هنا
+        this.sidebarItems = [
+          { centerName: 'كل المراكز', id: '' },
+          ...this.centersList,
+        ];
+
+        // Grid: اعرض كل المراكز بدون عنصر "كل المراكز"
+        this.filteredCenters = [...this.centersList];
       },
-      error: (err) => console.error('API Error:', err),
+      error: (err) => console.error(err),
     });
+  }
+
+  /** 🔍 البحث في الكروت */
+  searchCenters() {
+    const q = this.searchQuery.toLowerCase().trim();
+
+    if (q === '') {
+      // ★ لو البحث فارغ اعرض كل الكروت بدون "كل المراكز"
+      this.filteredCenters = [...this.centersList.filter((c) => c.id !== '')];
+      return;
+    }
+
+    this.filteredCenters = this.centersList
+      .filter((c) => c.id !== '') // استبعاد "كل المراكز" من البحث
+      .filter((center) => center.centerName.toLowerCase().includes(q));
+  }
+
+  selectCenter(center: Center | { centerName: string; id: string }) {
+    if (center.id === '') {
+      // كل المراكز
+      this.filteredCenters = [...this.centersList];
+      this.selectedCenterId = '';
+      return;
+    }
+
+    // مركز محدد
+    this.filteredCenters = [center as Center];
+    this.selectedCenterId = center.id;
+
+    setTimeout(() => {
+      const el = document.getElementById(center.id);
+      el?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 200);
   }
 }

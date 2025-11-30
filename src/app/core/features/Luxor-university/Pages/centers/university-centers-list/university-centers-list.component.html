@@ -7,18 +7,22 @@
   <div class="container-fluid py-5">
     <div class="row">
       <!-- 🔥 Sidebar -->
+      <!-- 🔥 Sidebar -->
       <div class="col-lg-4 col-md-3 mb-3">
         <div class="sidebar">
           <h2 class="section-title2 mb-4">مراكز الجامعة</h2>
 
-          @for (center of centersList; track center.id) {
+          <!-- استخدم sidebarItems -->
+          @for (item of sidebarItems; track item.id) {
           <div
             class="sidebar-item"
-            [class.active]="selectedCenterId === center.id"
-            (click)="selectCenter(center.id)"
+            [class.active]="
+              selectedCenterId === (item.id === '' ? '' : item.id)
+            "
+            (click)="selectCenter(item)"
           >
             <i class="pi pi-building me-2"></i>
-            {{ center.centerName }}
+            {{ item.centerName }}
           </div>
           }
         </div>
@@ -27,19 +31,17 @@
       <!-- 🔥 Main Content -->
       <div class="col-lg-8 col-md-8">
         <!-- Search Bar -->
-        <div class="search-bar mb-5">
-          <span class="p-input-icon-left w-100">
-            <i class="pi pi-search"></i>
-            <input
-              pInputText
-              type="text"
-              class="form-control"
-              placeholder="ابحث عن مركز..."
-              [(ngModel)]="searchQuery"
-              (input)="onSearch()"
-            />
-          </span>
-        </div>
+        <p-iconfield>
+          <p-inputicon class="pi pi-search" />
+          <input
+            type="text"
+            pInputText
+            placeholder="ابحث عن مركز..."
+            [(ngModel)]="searchQuery"
+            (input)="searchCenters()"
+            fluid="true"
+          />
+        </p-iconfield>
 
         <!-- Centers Grid -->
         <div class="row">
@@ -50,12 +52,12 @@
             <p-card class="center-card" [attr.id]="center.id">
               <div class="card-body">
                 <h3 class="card-title">{{ center.centerName }}</h3>
-                <p class="card-text">{{ center.about }}</p>
+                <p class="card-text">{{ center.about | slice : 0 : 120 }}...</p>
                 <a
                   routerLink="/centers/{{ center.id }}"
                   class="btn btn-primary-custom"
                 >
-                  <i class="pi pi-arrow-left me-2"></i>عرض التفاصيل
+                  <i class="pi pi-arrow-left ms-2"></i>عرض التفاصيل
                 </a>
               </div>
             </p-card>
